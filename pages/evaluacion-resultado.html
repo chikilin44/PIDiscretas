@@ -24,39 +24,100 @@
 
   <main class="page">
     <div class="container" style="max-width: 980px;">
+
       <section class="card card-muted" style="text-align:center; margin-bottom: 1rem;">
         <h1 style="margin-bottom: 0.5rem;">Examen completado</h1>
-        <p style="margin-top:0; color:#4b5563;">Resumen estatico del resultado.</p>
+        <p style="margin-top:0; color:#4b5563;">Resumen del resultado.</p>
+
         <div class="grid cols-3" style="margin-top: 1rem;">
-          <article class="card"><div class="kpi">Puntaje</div><strong style="color:#6b21a8; font-size:1.8rem;">8/10</strong></article>
-          <article class="card"><div class="kpi">Porcentaje</div><strong style="color:#6b21a8; font-size:1.8rem;">80%</strong></article>
-          <article class="card"><div class="kpi">Calificacion</div><strong style="color:#16a34a; font-size:1.3rem;">Muy bien</strong></article>
+          <article class="card">
+            <div class="kpi">Puntaje</div>
+            <strong id="puntaje" style="color:#6b21a8; font-size:1.8rem;">0/15</strong>
+          </article>
+
+          <article class="card">
+            <div class="kpi">Porcentaje</div>
+            <strong id="porcentaje" style="color:#6b21a8; font-size:1.8rem;">0%</strong>
+          </article>
+
+          <article class="card">
+            <div class="kpi">Calificacion</div>
+            <strong id="calificacion" style="color:#16a34a; font-size:1.3rem;">-</strong>
+          </article>
         </div>
       </section>
 
       <section class="card" style="margin-bottom: 1rem;">
-        <h3>Revision de respuestas</h3>
-        <ul class="list">
-          <li>1. Resultado de p y no p -> Correcta: Falso</li>
-          <li>2. Operacion A interseccion B -> Correcta</li>
-          <li>3. Filas con 3 variables -> Correcta: 8</li>
-          <li>4. Definicion de grafo completo -> Correcta</li>
-          <li>5. Propiedad de un arbol -> Correcta</li>
-          <li>6. Aristas en K5 -> Correcta: 10</li>
-          <li>7. Permutaciones de ABC -> Correcta: 6</li>
-          <li>8. Significado de nCk -> Correcta</li>
-          <li>9. Principio del palomar -> Incorrecta</li>
-          <li>10. Valor de 5 factorial -> Correcta: 120</li>
-        </ul>
+        <h3>Revisión de respuestas</h3>
+        <ul id="lista" class="list"></ul>
       </section>
 
       <section class="row">
         <a class="btn btn-purple" href="./evaluacion.html">Intentar de nuevo</a>
         <a class="btn btn-outline" href="./dashboard.html">Volver al dashboard</a>
       </section>
+
     </div>
   </main>
 
-  <footer class="site-footer"><div class="container"><p>2026 YEMM</p></div></footer>
+  <footer class="site-footer">
+    <div class="container"><p>2026 YEMM</p></div>
+  </footer>
+
+  <script>
+    const preguntas = [
+      { modulo: "Lógica y Conjuntos", texto: "¿Cuál es el valor de p ∧ ¬p?", correcta: "Falso" },
+      { modulo: "Lógica y Conjuntos", texto: "¿Qué representa A ∩ B?", correcta: "Intersección" },
+      { modulo: "Lógica y Conjuntos", texto: "¿Qué representa A ∪ B?", correcta: "Unión" },
+      { modulo: "Lógica y Conjuntos", texto: "Tabla de verdad de ¬p", correcta: "V→F, F→V" },
+      { modulo: "Lógica y Conjuntos", texto: "Conjuntos disjuntos son:", correcta: "Sin elementos en común" },
+
+      { modulo: "Teoría de Grafos", texto: "¿Qué es un grafo completo?", correcta: "Todos conectados" },
+      { modulo: "Teoría de Grafos", texto: "¿Cuántas aristas tiene K4?", correcta: "6" },
+      { modulo: "Teoría de Grafos", texto: "¿Qué es un vértice?", correcta: "Un punto" },
+      { modulo: "Teoría de Grafos", texto: "¿Qué es un ciclo?", correcta: "Camino cerrado" },
+      { modulo: "Teoría de Grafos", texto: "Un árbol se caracteriza por:", correcta: "No tener ciclos" },
+
+      { modulo: "Combinatoria", texto: "Permutaciones de ABC", correcta: "6" },
+      { modulo: "Combinatoria", texto: "nCk significa:", correcta: "Combinaciones" },
+      { modulo: "Combinatoria", texto: "Valor de 5!", correcta: "120" },
+      { modulo: "Combinatoria", texto: "Una combinación es:", correcta: "Orden no importa" },
+      { modulo: "Combinatoria", texto: "Una permutación es:", correcta: "Orden importa" }
+    ];
+
+    const respuestas = JSON.parse(localStorage.getItem("respuestas")) || [];
+
+    let correctas = 0;
+    const lista = document.getElementById("lista");
+
+    preguntas.forEach((p, i) => {
+      const esCorrecta = respuestas[i] === p.correcta;
+      if (esCorrecta) correctas++;
+
+      lista.innerHTML += `
+        <li>
+          ${i + 1}. ${p.texto} → 
+          <strong style="color:${esCorrecta ? '#16a34a' : '#dc2626'}">
+            ${esCorrecta ? "Correcta" : "Incorrecta"}
+          </strong>
+          ${!esCorrecta ? `(Correcta: ${p.correcta})` : ""}
+        </li>
+      `;
+    });
+
+    const porcentaje = Math.round((correctas / 15) * 100);
+
+    document.getElementById("puntaje").textContent = `${correctas}/15`;
+    document.getElementById("porcentaje").textContent = `${porcentaje}%`;
+
+    let calificacion = "";
+    if (porcentaje >= 90) calificacion = "Excelente";
+    else if (porcentaje >= 70) calificacion = "Muy bien";
+    else if (porcentaje >= 50) calificacion = "Regular";
+    else calificacion = "Necesita mejorar";
+
+    document.getElementById("calificacion").textContent = calificacion;
+  </script>
+
 </body>
 </html>

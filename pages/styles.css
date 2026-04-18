@@ -303,6 +303,35 @@ img {
   text-align: center;
   color: #d8b4fe;
 }
+.opcion {
+  border: 1px solid var(--purple-200);
+  background: #fff;
+  border-radius: 14px;
+  padding: 0.95rem 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  box-shadow: 0 4px 12px rgba(91, 33, 182, 0.06);
+}
+
+.opcion:hover {
+  background: var(--purple-200);
+  border-color: var(--purple-900);
+  transform: translateY(-2px);
+}
+
+.opcion input[type="radio"] {
+  transform: scale(1.35);
+  accent-color: var(--purple-700);
+}
+
+.opcion span {
+  font-size: 1rem;
+  color: var(--gray-700);
+  font-weight: 500;
+}
 
 @media (min-width: 760px) {
   .grid.cols-2 {
