@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>YEMM | Resultado Evaluacion</title>
   <link rel="stylesheet" href="./styles.css" />
 </head>
+
 <body>
   <header class="site-header">
     <div class="logo-band"><a class="logo" href="../index.html">YEMM</a></div>
@@ -66,29 +68,35 @@
   </main>
 
   <footer class="site-footer">
-    <div class="container"><p>2026 YEMM</p></div>
+    <div class="container">
+      <p>2026 YEMM</p>
+    </div>
   </footer>
 
   <script>
     const preguntas = [
+      // MÓDULO 1 — Lógica y Conjuntos
       { modulo: "Lógica y Conjuntos", texto: "¿Cuál es el valor de p ∧ ¬p?", correcta: "Falso" },
       { modulo: "Lógica y Conjuntos", texto: "¿Qué representa A ∩ B?", correcta: "Intersección" },
       { modulo: "Lógica y Conjuntos", texto: "¿Qué representa A ∪ B?", correcta: "Unión" },
       { modulo: "Lógica y Conjuntos", texto: "Tabla de verdad de ¬p", correcta: "V→F, F→V" },
       { modulo: "Lógica y Conjuntos", texto: "Conjuntos disjuntos son:", correcta: "Sin elementos en común" },
 
-      { modulo: "Teoría de Grafos", texto: "¿Qué es un grafo completo?", correcta: "Todos conectados" },
-      { modulo: "Teoría de Grafos", texto: "¿Cuántas aristas tiene K4?", correcta: "6" },
-      { modulo: "Teoría de Grafos", texto: "¿Qué es un vértice?", correcta: "Un punto" },
-      { modulo: "Teoría de Grafos", texto: "¿Qué es un ciclo?", correcta: "Camino cerrado" },
-      { modulo: "Teoría de Grafos", texto: "Un árbol se caracteriza por:", correcta: "No tener ciclos" },
+      // MÓDULO 2 — Teoría de Números
+      { modulo: "Teoría de Números", texto: "¿Cuál de estos es un número primo?", correcta: "13" },
+      { modulo: "Teoría de Números", texto: "¿Cuál es el residuo de 9 mod 4?", correcta: "1" },
+      { modulo: "Teoría de Números", texto: "¿Cuál es el residuo de 2 mod 2?", correcta: "0" },
+      { modulo: "Teoría de Números", texto: "¿Cuál de estos números es compuesto?", correcta: "15" },
+      { modulo: "Teoría de Números", texto: "¿Cuál de los siguientes es un número primo?", correcta: "11" },
 
-      { modulo: "Combinatoria", texto: "Permutaciones de ABC", correcta: "6" },
-      { modulo: "Combinatoria", texto: "nCk significa:", correcta: "Combinaciones" },
-      { modulo: "Combinatoria", texto: "Valor de 5!", correcta: "120" },
-      { modulo: "Combinatoria", texto: "Una combinación es:", correcta: "Orden no importa" },
-      { modulo: "Combinatoria", texto: "Una permutación es:", correcta: "Orden importa" }
+      // MÓDULO 3 — Congruencias Lineales
+      { modulo: "Congruencias Lineales", texto: "¿Qué significa a ≡ b (mod m)?", correcta: "a y b tienen el mismo residuo" },
+      { modulo: "Congruencias Lineales", texto: "¿Cuál es el residuo de 7 mod 9?", correcta: "7" },
+      { modulo: "Congruencias Lineales", texto: "¿Cuál es el residuo de 22 mod 4?", correcta: "2" },
+      { modulo: "Congruencias Lineales", texto: "¿Cuál congruencia es verdadera?", correcta: "7 ≡ 0 (mod 7)" },
+      { modulo: "Congruencias Lineales", texto: "¿Cuál número es congruente con 4 mod 12?", correcta: "16" }
     ];
+
 
     const respuestas = JSON.parse(localStorage.getItem("respuestas")) || [];
 
@@ -125,4 +133,5 @@
   </script>
 
 </body>
+
 </html>
