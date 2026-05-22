@@ -1,0 +1,56 @@
+### Listar todos los temas
+GET http://localhost:8080/api/v1/temas-service/temas
+
+###
+
+### Buscar tema por id
+GET http://localhost:8080/api/v1/temas-service/temas/1
+
+###
+
+### Crear un tema
+POST http://localhost:8080/api/v1/temas-service/temas
+Content-Type: application/json
+
+{
+  "titulo": "Relaciones y Funciones",
+  "contenido": "Estudio de relaciones binarias, funciones, dominio, codominio e imagen.",
+  "calculadoraUrl": "/calculadoras/relaciones-funciones",
+  "videoUrls": [
+    "/videos/relaciones-1",
+    "/videos/relaciones-2"
+  ],
+  "imagenUrls": [
+    "/imagenes/relaciones.png"
+  ],
+  "materialApoyoUrls": [
+    "/guias/relaciones.pdf"
+  ],
+  "moduloId": 1
+}
+
+###
+
+### Actualizar tema
+PUT http://localhost:8080/api/v1/temas-service/temas/1
+Content-Type: application/json
+
+{
+  "titulo": "Lógica Proposicional Actualizada",
+  "contenido": "Contenido actualizado.",
+  "calculadoraUrl": "/calculadoras/logica",
+  "videoUrls": [],
+  "imagenUrls": [],
+  "materialApoyoUrls": [],
+  "moduloId": 1
+}
+
+###
+
+### Eliminar tema
+DELETE http://localhost:8080/api/v1/temas-service/temas
+Content-Type: application/json
+
+{
+  "id": 1
+}

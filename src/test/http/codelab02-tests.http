@@ -1,0 +1,41 @@
+### Health check — debe mostrar db.status: "UP"
+GET http://localhost:8081/actuator/health
+Accept: application/json
+
+###
+
+### Info de la aplicación
+GET http://localhost:8081/actuator/info
+Accept: application/json
+
+###
+
+### Lista de métricas disponibles
+GET http://localhost:8081/actuator/metrics
+Accept: application/json
+
+###
+
+### Memoria JVM usada
+GET http://localhost:8081/actuator/metrics/jvm.memory.used
+Accept: application/json
+
+###
+
+### Conexiones activas de HikariCP
+GET http://localhost:8081/actuator/metrics/hikaricp.connections.active
+Accept: application/json
+
+###
+
+### Mappings (endpoints REST registrados)
+GET http://localhost:8081/actuator/mappings
+Accept: application/json
+
+###
+
+### Listar todos los temas (datos de import.sql)
+GET http://localhost:8080/api/v1/temas-service/temas
+Accept: application/json
+
+###
