@@ -1,23 +1,182 @@
+<!-- ════════════════════════════════════════════════════════════════════
+     YEMM — Temas Component
+     Muestra todos los temas del temas-service agrupados por módulo,
+     con CRUD completo (crear, editar, eliminar) via SweetAlert2.
+     ════════════════════════════════════════════════════════════════════ -->
 
-<div class="card shadow-sm">
-  <div class="card-header bg-primary text-white">
-    <strong>Lista de Clientes</strong>
-  </div>
-
-  <ul class="list-group list-group-flush">
-    <li *ngFor="let item of temas" class="list-group-item">
-      <div class="d-flex align-items-center">
-
-        <div class="flex-grow-1">
-          <strong>{{ item.titulo }} {{ item.id}}</strong>
-          <br>
-        </div>
-
+<!-- ENCABEZADO DE PÁGINA -->
+<div class="module-page-header">
+  <div class="module-page-inner">
+    <div>
+      <div class="module-eyebrow">Temas · temas-service</div>
+      <h1>Temas de Matemáticas Discretas</h1>
+      <p>Gestiona y explora los {{ temas.length }} temas disponibles en los tres módulos del curso.</p>
+      <div class="module-meta-badges">
+        <span class="meta-badge">{{ temas.length }} temas cargados</span>
+        <span class="meta-badge">3 módulos</span>
+        <span class="meta-badge">Puerto 8080</span>
       </div>
-    </li>
-  </ul>
-
-  <div *ngIf="temas.length === 0" class="card-body text-center text-muted">
-    No hay temas registrados.
+    </div>
+    <aside class="module-cover-card">
+      <ul class="module-facts">
+        <li>Módulo 1 — {{ temasPorModulo(1).length }} temas de Fundamentos</li>
+        <li>Módulo 2 — {{ temasPorModulo(2).length }} temas de Conteo</li>
+        <li>Módulo 3 — {{ temasPorModulo(3).length }} temas de Criptografía</li>
+      </ul>
+    </aside>
   </div>
 </div>
+
+<!-- CONTENIDO PRINCIPAL -->
+<div class="page">
+
+  <!-- BARRA DE ACCIONES -->
+  <div class="temas-toolbar content-grid" style="margin-bottom: 1.5rem;">
+    <div class="temas-toolbar-left">
+      <h2 class="temas-title">Lista de temas</h2>
+      <span class="badge">{{ temas.length }} registrados</span>
+    </div>
+    <div class="temas-toolbar-right">
+      <button class="btn-accent" (click)="agregarTema()">
+        <span>＋</span> Nuevo tema
+      </button>
+      <button class="btn-outline" (click)="cargarTemas()">
+        ↺ Recargar
+      </button>
+    </div>
+  </div>
+
+  <!-- ESTADO: CARGANDO -->
+  <div class="loading-state content-grid" *ngIf="cargando">
+    <div class="spinner"></div>
+    <span>Consultando temas-service en http://localhost:8080…</span>
+  </div>
+
+  <!-- ESTADO: SIN DATOS -->
+  <div class="empty-state content-grid" *ngIf="!cargando && temas.length === 0">
+    <div class="empty-icon">📭</div>
+    <h3>No hay temas registrados</h3>
+    <p>El servidor puede estar apagado, o la base de datos está vacía.</p>
+    <button class="btn-accent" (click)="agregarTema()">Crear primer tema</button>
+  </div>
+
+  <!-- TEMAS AGRUPADOS POR MÓDULO -->
+  <ng-container *ngIf="!cargando && temas.length > 0">
+
+    <div *ngFor="let modId of modulos" class="modulo-seccion">
+
+      <!-- Encabezado del módulo -->
+      <div class="modulo-header content-grid">
+        <div class="modulo-header-left">
+          <div class="modulo-orb">{{ modId }}</div>
+          <div>
+            <div class="modulo-label">Módulo {{ modId }}</div>
+            <h3 class="modulo-nombre">{{ modulo(modId) }}</h3>
+          </div>
+        </div>
+        <span class="badge">{{ temasPorModulo(modId).length }} temas</span>
+      </div>
+
+      <!-- Sin temas en este módulo -->
+      <p class="modulo-vacio content-grid"
+         *ngIf="temasPorModulo(modId).length === 0">
+        No hay temas en este módulo aún.
+      </p>
+
+      <!-- Grid de tarjetas de temas -->
+      <div class="temas-grid content-grid"
+           *ngIf="temasPorModulo(modId).length > 0">
+
+        <article class="tema-card"
+                 *ngFor="let tema of temasPorModulo(modId)">
+
+          <!-- Cabecera de la tarjeta -->
+          <div class="tema-card-head">
+            <div class="tema-id"># {{ tema.id }}</div>
+            <div class="tema-actions">
+              <button class="btn-action btn-edit"
+                      (click)="editarTema(tema)"
+                      title="Editar tema">✏️</button>
+              <button class="btn-action btn-delete"
+                      (click)="eliminarTema(tema.id!)"
+                      title="Eliminar tema">🗑️</button>
+            </div>
+          </div>
+
+          <!-- Título -->
+          <h4 class="tema-titulo">{{ tema.titulo }}</h4>
+
+          <!-- Contenido (recortado) -->
+          <p class="tema-contenido">
+            {{ tema.contenido | slice:0:120 }}{{ tema.contenido.length > 120 ? '…' : '' }}
+          </p>
+
+          <!-- Footer de la tarjeta -->
+          <div class="tema-card-footer">
+
+            <!-- Calculadora -->
+            <span class="tema-chip chip-calc" *ngIf="tema.calculadoraUrl">
+              ⚙ Calculadora
+            </span>
+            <span class="tema-chip chip-no-calc" *ngIf="!tema.calculadoraUrl">
+              Sin calculadora
+            </span>
+
+            <!-- Materiales -->
+            <span class="tema-chip chip-mat"
+                  *ngIf="tema.materialApoyoUrls && tema.materialApoyoUrls.length > 0">
+              📄 {{ tema.materialApoyoUrls.length }} material(es)
+            </span>
+
+            <!-- Videos -->
+            <span class="tema-chip chip-vid"
+                  *ngIf="tema.videoUrls && tema.videoUrls.length > 0">
+              🎬 {{ tema.videoUrls.length }} video(s)
+            </span>
+
+          </div>
+
+          <!-- Recursos expandibles (si existen) -->
+          <div class="tema-recursos"
+               *ngIf="(tema.imagenUrls && tema.imagenUrls.length > 0) ||
+                      (tema.materialApoyoUrls && tema.materialApoyoUrls.length > 0) ||
+                      (tema.videoUrls && tema.videoUrls.length > 0)">
+
+            <div class="recurso-grupo" *ngIf="tema.imagenUrls && tema.imagenUrls.length > 0">
+              <span class="recurso-label">🖼 Imágenes:</span>
+              <ul class="recurso-list">
+                <li *ngFor="let url of tema.imagenUrls">
+                  <a [href]="url" target="_blank">{{ url }}</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="recurso-grupo" *ngIf="tema.videoUrls && tema.videoUrls.length > 0">
+              <span class="recurso-label">🎬 Videos:</span>
+              <ul class="recurso-list">
+                <li *ngFor="let url of tema.videoUrls">
+                  <a [href]="url" target="_blank">{{ url }}</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="recurso-grupo" *ngIf="tema.materialApoyoUrls && tema.materialApoyoUrls.length > 0">
+              <span class="recurso-label">📄 Materiales:</span>
+              <ul class="recurso-list">
+                <li *ngFor="let url of tema.materialApoyoUrls">
+                  <a [href]="url" target="_blank">{{ url }}</a>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+
+        </article>
+
+      </div><!-- /temas-grid -->
+
+    </div><!-- /modulo-seccion -->
+
+  </ng-container>
+
+</div><!-- /page -->

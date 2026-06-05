@@ -1,0 +1,323 @@
+/* ════════════════════════════════════════════════════════════════════════════
+   YEMM — temas.css
+   Estilos del componente Temas.
+   Las variables CSS (--accent, --ink, --font-serif, etc.)
+   y clases base (.page, .card, .badge, .module-page-header…)
+   vienen de styles.css global — no se repiten aquí.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ── TOOLBAR ─────────────────────────────────────────────────────────────── */
+.temas-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.temas-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+
+.temas-toolbar-right {
+  display: flex;
+  gap: .6rem;
+  flex-wrap: wrap;
+}
+
+.temas-title {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  color: var(--ink);
+  margin: 0;
+}
+
+/* ── BOTONES ─────────────────────────────────────────────────────────────── */
+.btn-accent {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: .65rem 1.2rem;
+  font-size: .875rem;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 14px rgba(108, 60, 225, .38);
+}
+.btn-accent:hover {
+  background: #5a31c9;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(108, 60, 225, .5);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  background: #fff;
+  color: var(--accent);
+  border: 1.5px solid var(--surface-3);
+  border-radius: var(--radius-sm);
+  padding: .65rem 1.2rem;
+  font-size: .875rem;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.btn-outline:hover {
+  border-color: var(--accent-3);
+  background: var(--surface-2);
+  transform: translateY(-2px);
+}
+
+/* ── ESTADOS VACÍO / CARGA ───────────────────────────────────────────────── */
+.loading-state {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: 2rem 0;
+  color: var(--ink-3);
+  font-size: .9rem;
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--surface-3);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+  flex-shrink: 0;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .85rem;
+  padding: 3.5rem 1rem;
+  text-align: center;
+}
+.empty-icon { font-size: 3rem; }
+.empty-state h3 {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  color: var(--ink);
+}
+.empty-state p { font-size: .9rem; color: var(--ink-3); }
+
+/* ── SECCIÓN POR MÓDULO ──────────────────────────────────────────────────── */
+.modulo-seccion {
+  margin-bottom: 2.5rem;
+}
+
+.modulo-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin-bottom: 1rem;
+  padding-bottom: .85rem;
+  border-bottom: 2px solid var(--surface-2);
+}
+
+.modulo-header-left {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+}
+
+.modulo-orb {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff;
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(108, 60, 225, .35);
+}
+
+.modulo-label {
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .1rem;
+}
+
+.modulo-nombre {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  color: var(--ink);
+  margin: 0;
+}
+
+.modulo-vacio {
+  font-size: .875rem;
+  color: var(--ink-3);
+  padding: .75rem 0;
+}
+
+/* ── GRID DE TARJETAS ────────────────────────────────────────────────────── */
+.temas-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+/* ── TARJETA DE TEMA ─────────────────────────────────────────────────────── */
+.tema-card {
+  background: #fff;
+  border: 1px solid var(--surface-3);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  transition: var(--transition);
+}
+.tema-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent-3);
+  transform: translateY(-3px);
+}
+
+/* Cabecera */
+.tema-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tema-id {
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--ink-3);
+  background: var(--surface-2);
+  border: 1px solid var(--surface-3);
+  border-radius: var(--radius-sm);
+  padding: .2rem .55rem;
+}
+
+.tema-actions {
+  display: flex;
+  gap: .4rem;
+}
+
+.btn-action {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--surface-3);
+  background: #fff;
+  font-size: .9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  padding: 0;
+}
+.btn-edit:hover   { background: var(--surface-2); border-color: var(--accent-3); }
+.btn-delete:hover { background: #fff0f4; border-color: #f4aabb; }
+
+/* Título y contenido */
+.tema-titulo {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  color: var(--ink);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.tema-contenido {
+  font-size: .85rem;
+  color: var(--ink-3);
+  line-height: 1.6;
+  margin: 0;
+  flex: 1;
+}
+
+/* Footer con chips */
+.tema-card-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  padding-top: .65rem;
+  border-top: 1px solid var(--surface-2);
+}
+
+.tema-chip {
+  font-size: .74rem;
+  font-weight: 600;
+  padding: .22rem .6rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+
+.chip-calc    { background: var(--surface-2); color: var(--accent);   border-color: var(--surface-3); }
+.chip-no-calc { background: #fff8f0;          color: #b45309;         border-color: #fde68a; }
+.chip-mat     { background: #f0fdf4;          color: #166534;         border-color: #bbf7d0; }
+.chip-vid     { background: #eff6ff;          color: #1d4ed8;         border-color: #bfdbfe; }
+
+/* ── RECURSOS EXPANDIBLES ────────────────────────────────────────────────── */
+.tema-recursos {
+  background: var(--surface);
+  border: 1px solid var(--surface-3);
+  border-radius: var(--radius-sm);
+  padding: .75rem .9rem;
+  display: grid;
+  gap: .65rem;
+}
+
+.recurso-grupo { display: grid; gap: .3rem; }
+
+.recurso-label {
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.recurso-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: .25rem;
+}
+
+.recurso-list li a {
+  font-size: .8rem;
+  color: var(--accent);
+  font-weight: 500;
+  word-break: break-all;
+  transition: var(--transition);
+}
+.recurso-list li a:hover { text-decoration: underline; }
+
+/* ── RESPONSIVE ──────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .temas-toolbar   { flex-direction: column; align-items: flex-start; }
+  .temas-grid      { grid-template-columns: 1fr; }
+  .modulo-header   { flex-direction: column; align-items: flex-start; }
+}
