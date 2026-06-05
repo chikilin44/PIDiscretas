@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YEMM | Módulo 1 — Fundamentos</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+</head>
+<body data-module-id="1">
+
+  <!-- NAV -->
+  <header class="site-header">
+    <nav class="nav-inner">
+      <a class="logo" href="./index.html">YEMM</a>
+      <div class="nav-links">
+        <a href="./index.html">Inicio</a>
+        <a href="./dashboard.html">Dashboard</a>
+        <details class="modules-dropdown">
+          <summary class="is-active">Módulos</summary>
+          <div class="dropdown-menu">
+            <a class="is-active" href="./modulo-1.html">Módulo 1 — Fundamentos</a>
+            <a href="./modulo-2.html">Módulo 2 — Conteo</a>
+            <a href="./modulo-3.html">Módulo 3 — Criptografía</a>
+          </div>
+        </details>
+        <a href="./evaluacion.html">Evaluación</a>
+        <a href="./perfil.html">Perfil</a>
+        <a href="./login.html">Login</a>
+        <a href="./register.html">Registro</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- MODULE HEADER -->
+  <div class="module-page-header">
+    <div class="module-page-inner">
+      <div>
+        <div class="module-eyebrow">Módulo 1 · Fundamentos</div>
+        <h1>Lógica y Álgebra Booleana</h1>
+        <p>Propiedades de las proposiciones, técnicas de demostración, teoría de conjuntos y álgebra booleana con calculadoras integradas.</p>
+        <div class="module-meta-badges">
+          <span class="meta-badge">4 temas</span>
+          <span class="meta-badge">Interactivo</span>
+          <span class="meta-badge">Calculadoras</span>
+        </div>
+        <div style="margin-top:1.5rem">
+          <a class="btn-module" href="#contenidos">Ver temas ↓</a>
+        </div>
+      </div>
+      <aside class="module-cover-card">
+        <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" alt="Módulo 1" />
+        <ul class="module-facts">
+          <li>Lógica proposicional y tablas de verdad</li>
+          <li>Técnicas de demostración directa e inductiva</li>
+          <li>Conjuntos, operaciones y diagramas de Venn</li>
+          <li>Álgebra booleana y simplificación</li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+
+  <main class="page" id="contenidos">
+    <div class="content-grid cols-2" style="margin-bottom:1.5rem">
+
+      <!-- TOPIC LIST -->
+      <article class="card">
+        <div class="card-row">
+          <h3>Temas del módulo</h3>
+          <span class="badge">4 temas</span>
+        </div>
+        <div class="topic-list">
+          <button class="topic-item" data-topic="1">
+            1. Lógica Proposicional
+            <span class="topic-num">01</span>
+          </button>
+          <button class="topic-item" data-topic="2">
+            2. Técnicas de Demostración
+            <span class="topic-num">02</span>
+          </button>
+          <button class="topic-item" data-topic="3">
+            3. Teoría de Conjuntos
+            <span class="topic-num">03</span>
+          </button>
+          <button class="topic-item" data-topic="4">
+            4. Álgebra Booleana
+            <span class="topic-num">04</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- TOPIC VIEWER -->
+      <article class="card card-muted" id="topic-viewer">
+        <div id="topic-content">
+          <div class="topic-placeholder">
+            <div class="topic-placeholder-icon">📖</div>
+            <h3 style="font-family:var(--font-serif);color:var(--ink);font-size:1.2rem">Selecciona un tema</h3>
+            <p>Haz clic en cualquier tema de la izquierda para ver teoría, ejemplo y recursos.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="content-grid cols-half" style="margin-bottom:1.5rem">
+      <!-- OBJECTIVES -->
+      <article class="card">
+        <h3>Objetivos del módulo</h3>
+        <ul class="objective-list">
+          <li>Construir y evaluar tablas de verdad de fórmulas proposicionales.</li>
+          <li>Identificar tautologías, contradicciones y contingencias.</li>
+          <li>Aplicar técnicas de demostración directa, por contradicción e inducción.</li>
+          <li>Operar con conjuntos y aplicar el principio de inclusión-exclusión.</li>
+          <li>Simplificar expresiones booleanas usando las leyes de De Morgan.</li>
+        </ul>
+      </article>
+
+      <!-- CALCULATOR -->
+      <article class="card">
+        <h3>Calculadora rápida</h3>
+        <div class="calc-form" id="calculator-form">
+          <div class="calc-row">
+            <input type="number" name="calculator-left" value="4" aria-label="Primer valor" />
+            <select name="calculator-operation" aria-label="Operación">
+              <option value="+">Suma</option>
+              <option value="-">Resta</option>
+              <option value="*">Multiplicación</option>
+              <option value="/">División</option>
+              <option value="mod">Módulo</option>
+            </select>
+            <input type="number" name="calculator-right" value="2" aria-label="Segundo valor" />
+          </div>
+          <button class="btn-calc" type="button" id="calc-btn">Calcular</button>
+        </div>
+        <div class="calc-result" id="calculator-result">Resultado: —</div>
+      </article>
+    </div>
+
+    <!-- RESOURCES -->
+    <article class="card card-muted" style="width:min(var(--container),calc(100% - 2.5rem));margin:0 auto">
+      <div class="card-row">
+        <h3>Recursos del módulo</h3>
+        <span class="badge">Material de apoyo</span>
+      </div>
+      <ul class="resource-list" id="module-resources">
+        <li><a href="https://example.com/logica.pdf" target="_blank">Apuntes: Lógica proposicional (PDF)</a></li>
+        <li><a href="https://example.com/demostraciones.pdf" target="_blank">Guía de demostraciones (PDF)</a></li>
+        <li><a href="https://example.com/conjuntos.pdf" target="_blank">Conjuntos — resumen (PDF)</a></li>
+        <li><a href="https://example.com/booleana.pdf" target="_blank">Álgebra Booleana (PDF)</a></li>
+      </ul>
+    </article>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">YEMM</div>
+        <p class="footer-desc">Plataforma interactiva para el aprendizaje de matemáticas discretas.</p>
+      </div>
+      <div class="footer-links">
+        <h5>Módulos</h5>
+        <ul>
+          <li><a href="./modulo-1.html">Módulo 1 — Fundamentos</a></li>
+          <li><a href="./modulo-2.html">Módulo 2 — Conteo</a></li>
+          <li><a href="./modulo-3.html">Módulo 3 — Criptografía</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h5>Plataforma</h5>
+        <ul>
+          <li><a href="./dashboard.html">Dashboard</a></li>
+          <li><a href="./evaluacion.html">Evaluación</a></li>
+          <li><a href="./perfil.html">Perfil</a></li>
+        </ul>
+      </div>|
+    </div>
+    <div class="footer-inner" style="padding-top:0">
+      <div class="footer-bottom" style="grid-column:1/-1">
+        <p>© 2026 YEMM — Matemáticas Discretas</p>
+      </div>
+    </div>
+  </footer>
+  <script src="./librerias/logica.js"></script>
+  <script src="./librerias/booleana.js"></script>
+  <script>
+  (function(){
+    console.log(Logica.and(1,1));
+    console.log(Logica.or(1,0));
+    console.log(Logica.not(1));
+    console.log("AND:", Booleana.and(1,1));
+    console.log("OR:", Booleana.or(1,0));
+    console.log("NOT:", Booleana.not(1));
+    const topics = {
+      1:{
+        title:'Lógica Proposicional',
+        theory:'La lógica proposicional trata proposiciones que pueden ser verdaderas o falsas y los conectores que permiten combinarlas: negación (¬), conjunción (∧), disyunción (∨), implicación (→) y equivalencia (↔). Se usan tablas de verdad para evaluar fórmulas y estudiar equivalencias. Conceptos clave: tautología, contradicción, contingencia, formas normales (CNF/DNF).',
+        example:'Construir la tabla de verdad de (p → q) ↔ (¬p ∨ q) y comprobar que la columna resultante es toda verdadera (tautología).',
+        resources:[['Apuntes: Lógica proposicional (PDF)','https://example.com/logica.pdf']],
+        calculator:'boolean'
+      },
+      2:{
+        title:'Técnicas de Demostración',
+        theory:'Métodos: demostración directa, por contraposición, por contradicción y por inducción. La inducción matemática requiere verificar la base y el paso inductivo. Es fundamental escribir hipótesis y conclusiones con claridad.',
+        example:'Demostrar por inducción que 1+2+...+n = n(n+1)/2: caso base n=1; paso: sumar n+1 y simplificar usando la hipótesis inductiva.',
+        resources:[['Guía de demostraciones (PDF)','https://example.com/demostraciones.pdf']]
+      },
+      3:{
+        title:'Teoría de Conjuntos',
+        theory:'Definiciones y notación. Operaciones: unión, intersección, diferencia y complemento. Relaciones entre conjuntos, subconjuntos y producto cartesiano. Diagramas de Venn para visualización y uso del principio de inclusión-exclusión.',
+        example:'Dados A={1,2,3} y B={2,3,4}, calcular A∪B, A∩B y A\\B y representarlos en un diagrama de Venn.',
+        resources:[['Conjuntos — resumen (PDF)','https://example.com/conjuntos.pdf']]
+      },
+      4:{
+        title:'Álgebra Booleana',
+        theory:'Álgebra sobre valores {0,1}. Leyes: conmutativa, asociativa, distributiva, leyes de De Morgan. Simplificación de expresiones y aplicaciones en diseño de circuitos digitales.',
+        example:'Simplificar (A ∧ B) ∨ (A ∧ ¬B) = A ∧ (B ∨ ¬B) = A ∧ 1 = A.',
+        resources:[['Álgebra Booleana (PDF)','https://example.com/booleana.pdf']],
+        calculator:'boolean'
+      }
+    };
+
+    document.querySelectorAll('.topic-item').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        document.querySelectorAll('.topic-item').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        showTopic(btn.dataset.topic);
+      });
+    });
+
+    function showTopic(id){
+      const t = topics[id];
+      const c = document.getElementById('topic-content');
+      c.innerHTML = '';
+      const h = el('h2',{textContent:t.title}); c.appendChild(h);
+      c.appendChild(section4('Teoría',t.theory));
+      c.appendChild(section4('Ejemplo',t.example));
+      if(t.resources && t.resources.length){
+        const rs = el('section'); rs.innerHTML='<h4>Material de apoyo</h4><ul class="resource-list">'+t.resources.map(r=>'<li><a href="'+r[1]+'" target="_blank">'+r[0]+'</a></li>').join('')+'</ul>';
+        c.appendChild(rs);
+      }
+      if(t.calculator==='boolean') appendBoolCalc(c);
+    }
+
+    function el(tag,props={}){ const e=document.createElement(tag); Object.assign(e,props); return e; }
+    function section4(title,text){ const s=el('section'); s.innerHTML='<h4>'+title+'</h4><p>'+text+'</p>'; return s; }
+
+    function appendBoolCalc(c){
+      const s=el('section');
+      s.innerHTML=`<h4>Calculadora: Tabla de verdad</h4>
+        <div class="calc-widget">
+          <p style="font-size:.82rem;color:var(--ink-3);margin-bottom:.5rem">Variables: letras (a,b,c). Operadores: ! (NOT), &amp; (AND), | (OR).</p>
+          <input id="bool-expr" placeholder="a & (b | !c)" />
+          <div class="calc-btn-row"><button class="btn-sm primary" id="bool-run">Generar tabla</button></div>
+          <pre id="bool-output"></pre>
+        </div>`;
+      c.appendChild(s);
+      document.getElementById('bool-run').addEventListener('click',()=>{
+        const expr=document.getElementById('bool-expr').value.trim();
+        if(!expr){document.getElementById('bool-output').textContent='Introduce una expresión.';return;}
+        try{document.getElementById('bool-output').textContent=truthTable(expr);}
+        catch(e){document.getElementById('bool-output').textContent='Error: '+e.message;}
+      });
+    }
+
+    function truthTable(raw){
+      const e=raw.replace(/∧|AND/gi,'&').replace(/∨|OR/gi,'|').replace(/¬|NOT/gi,'!').replace(/\s+/g,'');
+      const vars=Array.from(new Set(e.replace(/[^a-z]/gi,'').split('').sort()));
+      if(!vars.length) throw new Error('No se detectaron variables (usa a,b,c...).');
+      const rows=[vars.join('\t')+'\t| Result'];
+      for(let i=0;i<Math.pow(2,vars.length);i++){
+        const assign={};
+        vars.forEach((v,idx)=>assign[v]=!!(i&(1<<(vars.length-1-idx))));
+        let expr=e;
+        vars.forEach(v=>{expr=expr.replace(new RegExp('\\b'+v+'\\b','g'),assign[v]?'true':'false');});
+        expr=expr.replace(/&/g,'&&').replace(/\|/g,'||');
+        const res=eval(expr);
+        rows.push(vars.map(v=>assign[v]?'1':'0').join('\t')+'\t| '+(res?'1':'0'));
+      }
+      return rows.join('\n');
+    }
+
+    // Quick calc
+    document.getElementById('calc-btn').addEventListener('click',()=>{
+      const form=document.getElementById('calculator-form');
+      const a=parseFloat(form.querySelector('[name=calculator-left]').value);
+      const b=parseFloat(form.querySelector('[name=calculator-right]').value);
+      const op=form.querySelector('[name=calculator-operation]').value;
+      let r;
+      if(op==='+')r=a+b; else if(op==='-')r=a-b; else if(op==='*')r=a*b;
+      else if(op==='/')r=b===0?'∞':a/b; else r=((a%b)+b)%b;
+      document.getElementById('calculator-result').textContent='Resultado: '+r;
+    });
+  })();
+  </script>
+</body>
+</html>

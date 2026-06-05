@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YEMM | Módulo 2 — Conteo y Combinatoria</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+</head>
+<body data-module-id="2">
+
+  <header class="site-header">
+    <nav class="nav-inner">
+      <a class="logo" href="./index.html">YEMM</a>
+      <div class="nav-links">
+        <a href="./index.html">Inicio</a>
+        <a href="./dashboard.html">Dashboard</a>
+        <details class="modules-dropdown">
+          <summary class="is-active">Módulos</summary>
+          <div class="dropdown-menu">
+            <a href="./modulo-1.html">Módulo 1 — Fundamentos</a>
+            <a class="is-active" href="./modulo-2.html">Módulo 2 — Conteo</a>
+            <a href="./modulo-3.html">Módulo 3 — Criptografía</a>
+          </div>
+        </details>
+        <a href="./evaluacion.html">Evaluación</a>
+        <a href="./perfil.html">Perfil</a>
+        <a href="./login.html">Login</a>
+        <a href="./register.html">Registro</a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="module-page-header" style="background:linear-gradient(135deg,#0c2a4a 0%,#0e4a6e 60%,#0e7490 100%)">
+    <div class="module-page-inner">
+      <div>
+        <div class="module-eyebrow">Módulo 2 · Conteo</div>
+        <h1>Combinatoria y Sucesiones</h1>
+        <p>Principios de conteo, permutaciones y combinaciones, sucesiones y el principio del palomar, con generadores interactivos.</p>
+        <div class="module-meta-badges">
+          <span class="meta-badge">4 temas</span>
+          <span class="meta-badge">Calculadoras</span>
+          <span class="meta-badge">Generadores</span>
+        </div>
+        <div style="margin-top:1.5rem"><a class="btn-module" href="#contenidos">Ver temas ↓</a></div>
+      </div>
+      <aside class="module-cover-card">
+        <img src="https://images.unsplash.com/photo-1524522173746-f628baad3644?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" alt="Módulo 2" />
+        <ul class="module-facts">
+          <li>Regla de la suma y del producto</li>
+          <li>Permutaciones P(n,k) y combinaciones C(n,k)</li>
+          <li>Sucesiones aritméticas y geométricas</li>
+          <li>Principio del Palomar y aplicaciones</li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+
+  <main class="page" id="contenidos">
+    <div class="content-grid cols-2" style="margin-bottom:1.5rem">
+      <article class="card">
+        <div class="card-row">
+          <h3>Temas del módulo</h3>
+          <span class="badge">4 temas</span>
+        </div>
+        <div class="topic-list">
+          <button class="topic-item" data-topic="5">5. Principios de Conteo<span class="topic-num">05</span></button>
+          <button class="topic-item" data-topic="6">6. Combinatoria<span class="topic-num">06</span></button>
+          <button class="topic-item" data-topic="7">7. Sucesiones<span class="topic-num">07</span></button>
+          <button class="topic-item" data-topic="8">8. Principio del Palomar<span class="topic-num">08</span></button>
+        </div>
+      </article>
+
+      <article class="card card-muted" id="topic-viewer">
+        <div id="topic-content">
+          <div class="topic-placeholder">
+            <div class="topic-placeholder-icon">🔢</div>
+            <h3 style="font-family:var(--font-serif);color:var(--ink);font-size:1.2rem">Selecciona un tema</h3>
+            <p>Haz clic en cualquier tema de la izquierda para ver teoría, ejemplo y recursos.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="content-grid cols-half" style="margin-bottom:1.5rem">
+      <article class="card">
+        <h3>Objetivos del módulo</h3>
+        <ul class="objective-list">
+          <li>Aplicar la regla de la suma y del producto para contar casos.</li>
+          <li>Calcular permutaciones y combinaciones con y sin repetición.</li>
+          <li>Generar términos de sucesiones aritméticas y geométricas.</li>
+          <li>Usar el principio del palomar en demostraciones de existencia.</li>
+          <li>Resolver el principio de inclusión-exclusión en uniones.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h3>Calculadora rápida</h3>
+        <div class="calc-form">
+          <div class="calc-row">
+            <input type="number" id="ql" value="4" aria-label="Primer valor" />
+            <select id="qop" aria-label="Operación">
+              <option value="+">Suma</option>
+              <option value="-">Resta</option>
+              <option value="*">Multiplicación</option>
+              <option value="/">División</option>
+              <option value="mod">Módulo</option>
+            </select>
+            <input type="number" id="qr" value="2" aria-label="Segundo valor" />
+          </div>
+          <button class="btn-calc" id="calc-btn">Calcular</button>
+        </div>
+        <div class="calc-result" id="calculator-result">Resultado: —</div>
+      </article>
+    </div>
+
+    <article class="card card-muted" style="width:min(var(--container),calc(100% - 2.5rem));margin:0 auto">
+      <div class="card-row">
+        <h3>Recursos del módulo</h3>
+        <span class="badge">Material de apoyo</span>
+      </div>
+      <ul class="resource-list">
+        <li><a href="https://example.com/conteo.pdf" target="_blank">Principios de Conteo (PDF)</a></li>
+        <li><a href="https://example.com/combinatoria.pdf" target="_blank">Combinatoria (PDF)</a></li>
+        <li><a href="https://example.com/sucesiones.pdf" target="_blank">Sucesiones (PDF)</a></li>
+        <li><a href="https://example.com/palomar.pdf" target="_blank">Principio del Palomar (PDF)</a></li>
+      </ul>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">YEMM</div>
+        <p class="footer-desc">Plataforma interactiva de matemáticas discretas.</p>
+      </div>
+      <div class="footer-links">
+        <h5>Módulos</h5>
+        <ul>
+          <li><a href="./modulo-1.html">Módulo 1</a></li>
+          <li><a href="./modulo-2.html">Módulo 2</a></li>
+          <li><a href="./modulo-3.html">Módulo 3</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h5>Plataforma</h5>
+        <ul>
+          <li><a href="./dashboard.html">Dashboard</a></li>
+          <li><a href="./evaluacion.html">Evaluación</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-inner" style="padding-top:0">
+      <div class="footer-bottom" style="grid-column:1/-1">
+        <p>© 2026 YEMM — Matemáticas Discretas</p>
+      </div>
+    </div>
+  </footer>
+  <script src="./librerias/combinatoria.js"></script>
+  <script src="./librerias/sucesiones.js"></script>
+
+  <script>
+  (function(){
+    console.log("Factorial:", Combinatoria.factorial(5));
+    console.log("Combinación:", Combinatoria.combinacion(5,2));
+    console.log("Fibonacci(10):", Sucesiones.fibonacci(10));
+    console.log(
+      "Aritmética:",
+      Sucesiones.terminoAritmetico(2,3,5)
+  );
+    console.log(
+      "Geométrica:",
+      Sucesiones.terminoGeometrico(2,2,5)
+    );
+    const topics={
+      5:{title:'Principios de Conteo',theory:'Reglas básicas: la regla de la suma (eventos mutuamente excluyentes) y la regla del producto (combinaciones independientes). El principio de inclusión-exclusión permite contar elementos en uniones con solapamientos: |A∪B| = |A|+|B|-|A∩B|.',example:'Contar cadenas de longitud n bajo restricciones sencillas: separar casos disjuntos y multiplicar opciones independientes.',resources:[['Principios de Conteo (PDF)','https://example.com/conteo.pdf']]},
+      6:{title:'Combinatoria',theory:'Permutaciones (ordenadas): P(n,k)=n!/(n-k)!. Combinaciones (no ordenadas): C(n,k)=n!/(k!(n-k)!). Casos con repetición y coeficiente binomial. Aplicaciones en probabilidades discretas.',example:'¿Cuántas formas hay de elegir un comité de 3 personas de un grupo de 10? C(10,3)=120.',resources:[['Combinatoria (PDF)','https://example.com/combinatoria.pdf']],calculator:'comb'},
+      7:{title:'Sucesiones',theory:'Sucesiones definidas por fórmula explícita o recurrencia. Aritmética: a_n = a_1+(n-1)d. Geométrica: a_n = a_1·r^(n-1). Recurrencias lineales y su resolución estándar.',example:'Sucesión aritmética con a1=2, d=3: 2, 5, 8, 11, 14, ...',resources:[['Sucesiones (PDF)','https://example.com/sucesiones.pdf']],calculator:'sequence'},
+      8:{title:'Principio del Palomar',theory:'Si n objetos se distribuyen en m casilleros y n>m, entonces al menos un casillero contiene más de un objeto. Aplicaciones en demostraciones de existencia y problemas discretos.',example:'En un grupo de 13 personas hay al menos dos con el mismo mes de cumpleaños, pues 13 > 12 meses.',resources:[['Principio del Palomar (PDF)','https://example.com/palomar.pdf']]}
+    };
+
+    document.querySelectorAll('.topic-item').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        document.querySelectorAll('.topic-item').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        showTopic(btn.dataset.topic);
+      });
+    });
+
+    function el(tag,props={}){const e=document.createElement(tag);Object.assign(e,props);return e;}
+    function section4(title,text){const s=el('section');s.innerHTML='<h4>'+title+'</h4><p>'+text+'</p>';return s;}
+
+    function showTopic(id){
+      const t=topics[id];
+      const c=document.getElementById('topic-content');c.innerHTML='';
+      c.appendChild(el('h2',{textContent:t.title}));
+      c.appendChild(section4('Teoría',t.theory));
+      c.appendChild(section4('Ejemplo',t.example));
+      if(t.resources&&t.resources.length){
+        const rs=el('section');rs.innerHTML='<h4>Material de apoyo</h4><ul class="resource-list">'+t.resources.map(r=>'<li><a href="'+r[1]+'" target="_blank">'+r[0]+'</a></li>').join('')+'</ul>';
+        c.appendChild(rs);
+      }
+      if(t.calculator==='comb') appendCombCalc(c);
+      if(t.calculator==='sequence') appendSeqCalc(c);
+    }
+
+    function fact(x){let r=1;for(let i=2;i<=x;i++)r*=i;return r;}
+
+    function appendCombCalc(c){
+      const s=el('section');
+      s.innerHTML=`<h4>Calculadora: Permutaciones y Combinaciones</h4>
+        <div class="calc-widget">
+          <div class="input-row-2"><input id="n" placeholder="n" type="number"/><input id="k" placeholder="k" type="number"/></div>
+          <div class="calc-btn-row"><button class="btn-sm primary" id="comb-run">Calcular</button></div>
+          <pre id="comb-out"></pre>
+        </div>`;
+      c.appendChild(s);
+      document.getElementById('comb-run').addEventListener('click',()=>{
+        const n=Number(document.getElementById('n').value),k=Number(document.getElementById('k').value);
+        if(!Number.isFinite(n)||!Number.isFinite(k)){document.getElementById('comb-out').textContent='Introduce números válidos.';return;}
+        const perm=k>n?0:fact(n)/fact(n-k);
+        const comb=k>n?0:fact(n)/(fact(k)*fact(n-k));
+        document.getElementById('comb-out').textContent='P('+n+','+k+') = '+perm+'\nC('+n+','+k+') = '+comb;
+      });
+    }
+
+    function appendSeqCalc(c){
+      const s=el('section');
+      s.innerHTML=`<h4>Calculadora: Generador de sucesiones</h4>
+        <div class="calc-widget">
+          <label style="font-size:.82rem;color:var(--ink-3)">Tipo:
+            <select id="seq-type" style="width:auto;display:inline;margin-left:.4rem">
+              <option value="ar">Aritmética</option>
+              <option value="geo">Geométrica</option>
+            </select>
+          </label>
+          <div class="input-row-2" style="margin-top:.5rem">
+            <input id="a1" placeholder="Término inicial (a₁)" type="number"/>
+            <input id="r" placeholder="Razón (d o r)" type="number"/>
+          </div>
+          <input id="count" placeholder="Cantidad de términos" type="number" value="8" style="margin-top:.4rem"/>
+          <div class="calc-btn-row"><button class="btn-sm primary" id="seq-run">Generar</button></div>
+          <pre id="seq-out"></pre>
+        </div>`;
+      c.appendChild(s);
+      document.getElementById('seq-run').addEventListener('click',()=>{
+        const type=document.getElementById('seq-type').value,a1=Number(document.getElementById('a1').value),r=Number(document.getElementById('r').value),cnt=Number(document.getElementById('count').value)||8;
+        const arr=[];
+        if(type==='ar'){for(let i=0;i<cnt;i++)arr.push(a1+i*r);}
+        else{for(let i=0;i<cnt;i++)arr.push(+(a1*Math.pow(r,i)).toFixed(4));}
+        document.getElementById('seq-out').textContent=arr.join(', ');
+      });
+    }
+
+    document.getElementById('calc-btn').addEventListener('click',()=>{
+      const a=parseFloat(document.getElementById('ql').value),b=parseFloat(document.getElementById('qr').value),op=document.getElementById('qop').value;
+      let r;
+      if(op==='+')r=a+b;else if(op==='-')r=a-b;else if(op==='*')r=a*b;
+      else if(op==='/')r=b===0?'∞':a/b;else r=((a%b)+b)%b;
+      document.getElementById('calculator-result').textContent='Resultado: '+r;
+    });
+  })();
+  </script>
+</body>
+</html>
