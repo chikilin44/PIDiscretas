@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YEMM | Evaluación</title>
+  <style>
+    :root{--ink:#0f0a1e;--ink-2:#2a1f4a;--ink-3:#6b5c99;--surface:#faf8ff;--surface-2:#f0ebff;--surface-3:#ddd1ff;--accent:#6c3ce1;--accent-2:#9b6bff;--accent-3:#c4a8ff;--accent-glow:rgba(108,60,225,.15);--radius-sm:10px;--radius:16px;--radius-lg:22px;--shadow-xs:0 2px 8px rgba(15,10,30,.07);--shadow-sm:0 6px 20px rgba(15,10,30,.10);--shadow-md:0 16px 40px rgba(15,10,30,.13);--shadow-lg:0 24px 60px rgba(108,60,225,.18);--container:1160px;--nav-h:68px;--tr:all 0.22s cubic-bezier(.4,0,.2,1)}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+    body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--surface);color:var(--ink);min-height:100vh;line-height:1.65;font-size:16px}
+    a{color:inherit;text-decoration:none}
+    button{font-family:inherit;cursor:pointer}
+
+    .site-header{position:sticky;top:0;z-index:100;background:rgba(250,248,255,.92);backdrop-filter:blur(18px) saturate(1.5);border-bottom:1.5px solid var(--surface-3)}
+    .nav-inner{width:min(var(--container),calc(100% - 2rem));margin:0 auto;height:var(--nav-h);display:flex;align-items:center;gap:.75rem}
+    .logo{font-size:1.8rem;font-weight:800;letter-spacing:-.03em;background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-right:auto}
+    .nav-links{display:flex;align-items:center;gap:.3rem;flex-wrap:wrap}
+    .nav-links a{font-size:.875rem;font-weight:600;color:var(--ink-3);padding:.42rem .85rem;border-radius:999px;border:1.5px solid transparent;transition:var(--tr)}
+    .nav-links a:hover,.nav-links a.is-active{color:var(--accent);background:var(--surface-2);border-color:var(--surface-3)}
+    .modules-dropdown{position:relative}
+    .modules-dropdown summary{list-style:none;font-size:.875rem;font-weight:600;color:var(--ink-3);padding:.42rem .85rem;border-radius:999px;border:1.5px solid transparent;cursor:pointer;transition:var(--tr);display:flex;align-items:center;gap:.35rem;user-select:none}
+    .modules-dropdown summary::-webkit-details-marker{display:none}
+    .modules-dropdown summary::after{content:'▾';font-size:.75rem;transition:transform .2s;display:inline-block}
+    .modules-dropdown[open] summary::after{transform:rotate(180deg)}
+    .modules-dropdown summary:hover,.modules-dropdown[open] summary{color:var(--accent);background:var(--surface-2);border-color:var(--surface-3)}
+    .dropdown-menu{display:none;position:absolute;top:calc(100% + .5rem);left:50%;transform:translateX(-50%);background:#fff;border:1.5px solid var(--surface-3);border-radius:var(--radius);box-shadow:var(--shadow-md);padding:.5rem;min-width:210px;z-index:50}
+    .modules-dropdown[open] .dropdown-menu{display:grid;gap:.25rem}
+    .dropdown-menu a{display:block;padding:.55rem .8rem;border-radius:10px;font-size:.875rem;font-weight:600;color:var(--ink-2);transition:var(--tr)}
+    .dropdown-menu a:hover{background:var(--surface-2);color:var(--accent)}
+
+    /* EVAL HERO STRIP */
+    .eval-hero{background:linear-gradient(135deg,#0a0618 0%,#180d3c 40%,#2b1265 70%,#180d3c 100%);padding:2rem 0;position:relative;overflow:hidden}
+    .eval-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(108,60,225,.4) 0%,transparent 60%);pointer-events:none}
+    .eval-hero-inner{width:min(var(--container),calc(100% - 2rem));margin:0 auto;position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+    .eval-hero h1{font-size:1.6rem;font-weight:800;color:#fff;letter-spacing:-.02em;margin-bottom:.2rem}
+    .eval-hero p{font-size:.875rem;color:rgba(255,255,255,.52)}
+    .kpi-chips{display:flex;gap:.7rem;flex-wrap:wrap}
+    .kpi-chip{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:var(--radius-sm);padding:.55rem 1rem;text-align:center}
+    .kpi-chip strong{display:block;font-size:1.4rem;font-weight:800;color:#fff;line-height:1}
+    .kpi-chip span{font-size:.73rem;color:rgba(255,255,255,.45);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+
+    /* MAIN LAYOUT */
+    .page{padding:2rem 0 5rem}
+    .container{width:min(var(--container),calc(100% - 2rem));margin:0 auto}
+    .eval-layout{display:grid;gap:1.1rem;grid-template-columns:1fr 280px;align-items:start}
+
+    /* PROGRESS CARD */
+    .card{background:#fff;border:1.5px solid var(--surface-3);border-radius:var(--radius-lg);padding:1.45rem;box-shadow:var(--shadow-xs)}
+    .card-muted{background:linear-gradient(145deg,var(--surface-2),var(--surface));border:1.5px solid var(--surface-3);border-radius:var(--radius-lg);padding:1.45rem}
+
+    .prog-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.65rem}
+    .badge{display:inline-flex;align-items:center;background:var(--surface-2);color:var(--accent);border:1.5px solid var(--surface-3);font-size:.74rem;font-weight:700;padding:.24rem .68rem;border-radius:999px;letter-spacing:.02em}
+    .prog-pct{font-size:.82rem;font-weight:700;color:var(--ink-3)}
+    .prog-track{height:8px;background:var(--surface-2);border-radius:99px;overflow:hidden}
+    .prog-bar{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .5s ease}
+
+    /* MODULE LABEL */
+    .mod-label{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface-2);border:1px solid var(--surface-3);color:var(--accent);font-size:.74rem;font-weight:700;padding:.28rem .72rem;border-radius:999px;letter-spacing:.04em;margin-bottom:1rem}
+    .question-text{font-size:1.35rem;font-weight:800;color:var(--ink);line-height:1.3;letter-spacing:-.01em;margin-bottom:1.5rem}
+
+    /* OPTIONS */
+    .options-grid{display:grid;gap:.55rem;margin-bottom:1.4rem}
+    .option-label{display:flex;align-items:center;gap:.85rem;padding:.9rem 1.1rem;border:1.5px solid var(--surface-3);border-radius:var(--radius-sm);cursor:pointer;transition:var(--tr);background:#fff;font-size:.92rem;font-weight:600;color:var(--ink-2);position:relative}
+    .option-label:hover{border-color:var(--accent-3);background:var(--surface-2);color:var(--accent)}
+    .option-label input[type=radio]{position:absolute;opacity:0;pointer-events:none}
+    .option-label.selected{border-color:var(--accent);background:var(--surface-2);color:var(--accent)}
+    .option-circle{width:22px;height:22px;border-radius:50%;border:2px solid var(--surface-3);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:var(--tr)}
+    .option-label.selected .option-circle{border-color:var(--accent);background:var(--accent)}
+    .option-label.selected .option-circle::after{content:'';width:8px;height:8px;border-radius:50%;background:#fff}
+    .option-label:hover .option-circle{border-color:var(--accent-3)}
+
+    /* BUTTONS */
+    .btn-row{display:flex;gap:.65rem}
+    .btn-prev{padding:.75rem 1.3rem;background:#fff;color:var(--ink-3);border:1.5px solid var(--surface-3);border-radius:var(--radius-sm);font-size:.9rem;font-weight:700;cursor:pointer;transition:var(--tr)}
+    .btn-prev:hover:not(:disabled){border-color:var(--accent-3);color:var(--accent)}
+    .btn-prev:disabled{opacity:.4;cursor:not-allowed}
+    .btn-next{flex:1;padding:.75rem;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;border:none;border-radius:var(--radius-sm);font-size:.9rem;font-weight:700;cursor:pointer;transition:var(--tr);box-shadow:0 3px 14px rgba(108,60,225,.38)}
+    .btn-next:hover{transform:translateY(-1px);box-shadow:0 6px 22px rgba(108,60,225,.52)}
+    .alerta{color:#dc2626;font-size:.83rem;font-weight:600;margin-top:.6rem;display:none;align-items:center;gap:.35rem}
+    .alerta::before{content:'⚠'}
+
+    /* SIDEBAR */
+    .sidebar-card{background:linear-gradient(145deg,var(--surface-2),var(--surface));border:1.5px solid var(--surface-3);border-radius:var(--radius-lg);padding:1.3rem}
+    .sidebar-card h3{font-size:.75rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-bottom:1rem}
+    .stat-block{text-align:center;padding:.85rem;background:#fff;border:1.5px solid var(--surface-3);border-radius:var(--radius-sm);margin-bottom:.6rem}
+    .stat-block strong{display:block;font-size:1.9rem;font-weight:800;color:var(--accent);line-height:1;margin-bottom:.2rem}
+    .stat-block span{font-size:.75rem;color:var(--ink-3);font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+    .q-map{display:grid;grid-template-columns:repeat(5,1fr);gap:.35rem;margin-top:.5rem}
+    .q-dot{width:100%;aspect-ratio:1;border-radius:6px;background:var(--surface-3);border:1.5px solid transparent;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--ink-3);cursor:pointer;transition:var(--tr)}
+    .q-dot.answered{background:var(--surface-2);border-color:var(--accent-3);color:var(--accent)}
+    .q-dot.current{background:var(--accent);border-color:var(--accent);color:#fff}
+
+    /* FOOTER */
+    .site-footer{background:linear-gradient(135deg,#080413 0%,#170c3c 60%,#0c0620 100%);color:#fff;padding:1.5rem 0;margin-top:3rem}
+    .footer-bottom{width:min(var(--container),calc(100% - 2rem));margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem}
+    .footer-bottom p{font-size:.8rem;color:rgba(255,255,255,.28)}
+    .footer-brand-sm{font-size:1.1rem;font-weight:800;background:linear-gradient(90deg,#fff,var(--accent-3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+    @media(max-width:860px){.eval-layout{grid-template-columns:1fr}}
+    @media(max-width:700px){.nav-links{display:none}}
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav-inner">
+    <a class="logo" href="./index.html">YEMM</a>
+    <div class="nav-links">
+      <a href="./index.html">Inicio</a>
+      <a href="./dashboard.html">Dashboard</a>
+      <details class="modules-dropdown">
+        <summary>Módulos</summary>
+        <div class="dropdown-menu">
+          <a href="./modulo-1.html">Módulo 1 — Fundamentos</a>
+          <a href="./modulo-2.html">Módulo 2 — Conteo</a>
+          <a href="./modulo-3.html">Módulo 3 — Criptografía</a>
+        </div>
+      </details>
+      <a class="is-active" href="./evaluacion.html">Evaluación</a>
+      <a href="./perfil.html">Perfil</a>
+      <a href="./login.html">Login</a>
+      <a href="./register.html">Registro</a>
+    </div>
+  </nav>
+</header>
+
+<!-- HERO STRIP -->
+<div class="eval-hero">
+  <div class="eval-hero-inner">
+    <div>
+      <h1>Evaluación General</h1>
+      <p>Pon a prueba tus conocimientos en los 3 módulos</p>
+    </div>
+    <div class="kpi-chips">
+      <div class="kpi-chip"><strong id="kpiResp">0</strong><span>Respondidas</span></div>
+      <div class="kpi-chip"><strong id="kpiRest">15</strong><span>Restantes</span></div>
+      <div class="kpi-chip"><strong>15</strong><span>Total</span></div>
+    </div>
+  </div>
+</div>
+
+<main class="page">
+  <div class="container">
+
+    <!-- PROGRESS BAR -->
+    <div class="card-muted" style="margin-bottom:1.1rem">
+      <div class="prog-header">
+        <span class="badge" id="badgePregunta">Pregunta 1 de 15</span>
+        <span class="prog-pct" id="porcentaje">7% completado</span>
+      </div>
+      <div class="prog-track">
+        <div class="prog-bar" id="barra" style="width:7%"></div>
+      </div>
+    </div>
+
+    <div class="eval-layout">
+      <!-- QUESTION CARD -->
+      <div class="card">
+        <div class="mod-label" id="moduloLabel">📚 Módulo</div>
+        <div class="question-text" id="pregunta">Cargando pregunta...</div>
+        <div class="options-grid" id="opciones"></div>
+        <div class="btn-row">
+          <button class="btn-prev" id="btnAnterior" disabled>← Anterior</button>
+          <button class="btn-next" id="btnSiguiente">Siguiente →</button>
+        </div>
+        <div class="alerta" id="alerta">Selecciona una respuesta antes de continuar.</div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div>
+        <div class="sidebar-card" style="margin-bottom:.8rem">
+          <h3>Mapa de preguntas</h3>
+          <div class="q-map" id="qmap"></div>
+        </div>
+        <div class="sidebar-card">
+          <h3>Progreso de módulos</h3>
+          <div id="modProgress"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-bottom">
+    <span class="footer-brand-sm">YEMM</span>
+    <p>© 2026 YEMM — Matemáticas Discretas</p>
+  </div>
+</footer>
+
+<script>
+  const preguntas = [
+    { modulo: "Lógica y Conjuntos", emoji: "🔣", texto: "¿Cuál es el valor de p ∧ ¬p?", opciones: ["Verdadero", "Falso", "Depende", "No se puede determinar"], correcta: "Falso" },
+    { modulo: "Lógica y Conjuntos", emoji: "🔣", texto: "¿Qué representa A ∩ B?", opciones: ["Unión", "Intersección", "Diferencia", "Complemento"], correcta: "Intersección" },
+    { modulo: "Lógica y Conjuntos", emoji: "🔣", texto: "¿Qué representa A ∪ B?", opciones: ["Unión", "Intersección", "Diferencia", "Complemento"], correcta: "Unión" },
+    { modulo: "Lógica y Conjuntos", emoji: "🔣", texto: "Tabla de verdad de ¬p", opciones: ["V→F, F→V", "V→V, F→F", "Depende", "No se sabe"], correcta: "V→F, F→V" },
+    { modulo: "Lógica y Conjuntos", emoji: "🔣", texto: "Conjuntos disjuntos son:", opciones: ["Sin elementos en común", "Iguales", "Uno contiene al otro", "Infinitos"], correcta: "Sin elementos en común" },
+    { modulo: "Teoría de Números", emoji: "🔢", texto: "¿Qué significa a|b?", opciones: ["a divide exactamente a b", "a es mayor que b", "b es múltiplo de 10", "a y b son primos"], correcta: "a divide exactamente a b" },
+    { modulo: "Teoría de Números", emoji: "🔢", texto: "¿Cuál de estos es un número primo?", opciones: ["4", "6", "9", "13"], correcta: "13" },
+    { modulo: "Teoría de Números", emoji: "🔢", texto: "¿Cuál es el residuo de 9 mod 4?", opciones: ["0", "1", "2", "3"], correcta: "1" },
+    { modulo: "Teoría de Números", emoji: "🔢", texto: "¿Cuál es el residuo de 2 mod 2?", opciones: ["0", "1", "2", "No existe"], correcta: "0" },
+    { modulo: "Teoría de Números", emoji: "🔢", texto: "¿Cuál de estos números es compuesto?", opciones: ["2", "3", "5", "15"], correcta: "15" },
+    { modulo: "Congruencias Lineales", emoji: "🔐", texto: "¿Qué significa a ≡ b (mod m)?", opciones: ["a y b tienen el mismo residuo", "a es mayor que b", "m es primo", "a es múltiplo de b"], correcta: "a y b tienen el mismo residuo" },
+    { modulo: "Congruencias Lineales", emoji: "🔐", texto: "¿Cuál es el residuo de 7 mod 9?", opciones: ["0", "7", "2", "1"], correcta: "7" },
+    { modulo: "Congruencias Lineales", emoji: "🔐", texto: "¿Cuál es el residuo de 22 mod 4?", opciones: ["0", "1", "2", "3"], correcta: "2" },
+    { modulo: "Congruencias Lineales", emoji: "🔐", texto: "¿Cuál congruencia es verdadera?", opciones: ["4 ≡ 3 (mod 2)", "11 ≡ 1 (mod 5)", "7 ≡ 0 (mod 7)", "5 ≡ 3 (mod 1)"], correcta: "7 ≡ 0 (mod 7)" },
+    { modulo: "Congruencias Lineales", emoji: "🔐", texto: "¿Cuál número es congruente con 4 mod 12?", opciones: ["10", "16", "20", "22"], correcta: "16" },
+  ];
+
+  let index = 0;
+  let respuestas = Array(15).fill(null);
+
+  // Build q-map
+  const qmap = document.getElementById('qmap');
+  preguntas.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'q-dot' + (i === 0 ? ' current' : '');
+    d.textContent = i + 1;
+    d.addEventListener('click', () => {
+      const sel = document.querySelector("input[name='respuesta']:checked");
+      if (sel) respuestas[index] = sel.value;
+      index = i;
+      cargarPregunta();
+    });
+    qmap.appendChild(d);
+  });
+
+  function updateQmap() {
+    document.querySelectorAll('.q-dot').forEach((d, i) => {
+      d.className = 'q-dot';
+      if (respuestas[i] !== null) d.classList.add('answered');
+      if (i === index) d.classList.add('current');
+    });
+  }
+
+  function updateModProgress() {
+    const modulos = [
+      { name: "Lógica y Conjuntos", range: [0, 4] },
+      { name: "Teoría de Números", range: [5, 9] },
+      { name: "Congruencias", range: [10, 14] },
+    ];
+    const div = document.getElementById('modProgress');
+    div.innerHTML = modulos.map(m => {
+      const answered = respuestas.slice(m.range[0], m.range[1] + 1).filter(r => r !== null).length;
+      const pct = Math.round((answered / 5) * 100);
+      return `<div style="margin-bottom:.75rem">
+        <div style="display:flex;justify-content:space-between;font-size:.78rem;font-weight:700;color:var(--ink-2);margin-bottom:.3rem">
+          <span>${m.name}</span><span style="color:var(--accent)">${pct}%</span>
+        </div>
+        <div style="height:6px;background:var(--surface-3);border-radius:99px;overflow:hidden">
+          <div style="height:100%;width:${pct}%;background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:99px;transition:width .4s ease"></div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  function cargarPregunta() {
+    const p = preguntas[index];
+    document.getElementById('moduloLabel').innerHTML = `${p.emoji} ${p.modulo}`;
+    document.getElementById('pregunta').textContent = p.texto;
+
+    const opDiv = document.getElementById('opciones');
+    opDiv.innerHTML = '';
+    p.opciones.forEach(op => {
+      const lbl = document.createElement('label');
+      lbl.className = 'option-label' + (respuestas[index] === op ? ' selected' : '');
+      lbl.innerHTML = `
+        <input type="radio" name="respuesta" value="${op}" ${respuestas[index] === op ? 'checked' : ''} />
+        <span class="option-circle"></span>
+        <span>${op}</span>`;
+      lbl.addEventListener('click', () => {
+        document.querySelectorAll('.option-label').forEach(l => l.classList.remove('selected'));
+        lbl.classList.add('selected');
+      });
+      opDiv.appendChild(lbl);
+    });
+
+    document.getElementById('badgePregunta').textContent = `Pregunta ${index + 1} de 15`;
+    const pct = Math.round(((index + 1) / 15) * 100);
+    document.getElementById('porcentaje').textContent = `${pct}% completado`;
+    document.getElementById('barra').style.width = `${pct}%`;
+    document.getElementById('btnAnterior').disabled = index === 0;
+    document.getElementById('btnSiguiente').textContent = index === 14 ? 'Ver resultados →' : 'Siguiente →';
+    document.getElementById('alerta').style.display = 'none';
+
+    // KPIs
+    const resp = respuestas.filter(r => r !== null).length;
+    document.getElementById('kpiResp').textContent = resp;
+    document.getElementById('kpiRest').textContent = 15 - resp;
+
+    updateQmap();
+    updateModProgress();
+  }
+
+  document.getElementById('btnSiguiente').addEventListener('click', () => {
+    const sel = document.querySelector("input[name='respuesta']:checked");
+    if (!sel) { document.getElementById('alerta').style.display = 'flex'; return; }
+    respuestas[index] = sel.value;
+    if (index === 14) {
+      localStorage.setItem('respuestas', JSON.stringify(respuestas));
+      window.location.href = './evaluacion-resultado.html';
+      return;
+    }
+    index++;
+    cargarPregunta();
+  });
+
+  document.getElementById('btnAnterior').addEventListener('click', () => {
+    if (index > 0) { index--; cargarPregunta(); }
+  });
+
+  cargarPregunta();
+  updateModProgress();
+</script>
+</body>
+</html>

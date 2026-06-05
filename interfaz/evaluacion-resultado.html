@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YEMM | Resultado</title>
+  <style>
+    :root{--ink:#0f0a1e;--ink-2:#2a1f4a;--ink-3:#6b5c99;--surface:#faf8ff;--surface-2:#f0ebff;--surface-3:#ddd1ff;--accent:#6c3ce1;--accent-2:#9b6bff;--accent-3:#c4a8ff;--accent-glow:rgba(108,60,225,.15);--emerald:#10b981;--radius-sm:10px;--radius:16px;--radius-lg:22px;--shadow-xs:0 2px 8px rgba(15,10,30,.07);--shadow-sm:0 6px 20px rgba(15,10,30,.10);--shadow-md:0 16px 40px rgba(15,10,30,.13);--shadow-lg:0 24px 60px rgba(108,60,225,.18);--container:1160px;--nav-h:68px;--tr:all 0.22s cubic-bezier(.4,0,.2,1)}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+    body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--surface);color:var(--ink);min-height:100vh;line-height:1.65;font-size:16px}
+    a{color:inherit;text-decoration:none}
+    button{font-family:inherit;cursor:pointer}
+
+    .site-header{position:sticky;top:0;z-index:100;background:rgba(250,248,255,.92);backdrop-filter:blur(18px) saturate(1.5);border-bottom:1.5px solid var(--surface-3)}
+    .nav-inner{width:min(var(--container),calc(100% - 2rem));margin:0 auto;height:var(--nav-h);display:flex;align-items:center;gap:.75rem}
+    .logo{font-size:1.8rem;font-weight:800;letter-spacing:-.03em;background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-right:auto}
+    .nav-links{display:flex;align-items:center;gap:.3rem;flex-wrap:wrap}
+    .nav-links a{font-size:.875rem;font-weight:600;color:var(--ink-3);padding:.42rem .85rem;border-radius:999px;border:1.5px solid transparent;transition:var(--tr)}
+    .nav-links a:hover,.nav-links a.is-active{color:var(--accent);background:var(--surface-2);border-color:var(--surface-3)}
+    .modules-dropdown{position:relative}
+    .modules-dropdown summary{list-style:none;font-size:.875rem;font-weight:600;color:var(--ink-3);padding:.42rem .85rem;border-radius:999px;border:1.5px solid transparent;cursor:pointer;transition:var(--tr);display:flex;align-items:center;gap:.35rem;user-select:none}
+    .modules-dropdown summary::-webkit-details-marker{display:none}
+    .modules-dropdown summary::after{content:'▾';font-size:.75rem;transition:transform .2s;display:inline-block}
+    .modules-dropdown[open] summary::after{transform:rotate(180deg)}
+    .modules-dropdown summary:hover,.modules-dropdown[open] summary{color:var(--accent);background:var(--surface-2);border-color:var(--surface-3)}
+    .dropdown-menu{display:none;position:absolute;top:calc(100% + .5rem);left:50%;transform:translateX(-50%);background:#fff;border:1.5px solid var(--surface-3);border-radius:var(--radius);box-shadow:var(--shadow-md);padding:.5rem;min-width:210px;z-index:50}
+    .modules-dropdown[open] .dropdown-menu{display:grid;gap:.25rem}
+    .dropdown-menu a{display:block;padding:.55rem .8rem;border-radius:10px;font-size:.875rem;font-weight:600;color:var(--ink-2);transition:var(--tr)}
+    .dropdown-menu a:hover{background:var(--surface-2);color:var(--accent)}
+
+    /* RESULT HERO */
+    .result-hero{background:linear-gradient(135deg,#0a0618 0%,#180d3c 40%,#2b1265 70%,#180d3c 100%);padding:3.5rem 0;position:relative;overflow:hidden;text-align:center}
+    .result-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 70% at 50% 50%,rgba(108,60,225,.45) 0%,transparent 65%);pointer-events:none}
+    .result-hero-inner{width:min(var(--container),calc(100% - 2rem));margin:0 auto;position:relative;z-index:1}
+    .result-badge-wrap{margin-bottom:1.5rem}
+    .result-badge{width:90px;height:90px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2.8rem;margin:0 auto 1rem;border:3px solid rgba(255,255,255,.2);box-shadow:0 12px 40px rgba(108,60,225,.6)}
+    .result-hero h1{font-size:2.2rem;font-weight:800;color:#fff;letter-spacing:-.02em;margin-bottom:.4rem}
+    .result-hero p{font-size:.95rem;color:rgba(255,255,255,.52);margin-bottom:1.8rem}
+    .result-kpi-row{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+    .result-kpi{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.15);border-radius:var(--radius);padding:1.2rem 2rem;text-align:center;min-width:130px}
+    .result-kpi strong{display:block;font-size:2.4rem;font-weight:800;color:#fff;line-height:1;margin-bottom:.3rem}
+    .result-kpi span{font-size:.73rem;color:rgba(255,255,255,.42);font-weight:700;text-transform:uppercase;letter-spacing:.07em}
+
+    /* CONTENT */
+    .page{padding:2.25rem 0 5rem}
+    .container{width:min(var(--container),calc(100% - 2rem));margin:0 auto;max-width:920px}
+    .grid-3{display:grid;gap:1rem;grid-template-columns:repeat(3,1fr);margin-bottom:1.1rem}
+    .card{background:#fff;border:1.5px solid var(--surface-3);border-radius:var(--radius-lg);padding:1.45rem;box-shadow:var(--shadow-xs)}
+
+    /* MODULE BREAKDOWN */
+    .mod-result{background:linear-gradient(145deg,var(--surface-2),var(--surface));border:1.5px solid var(--surface-3);border-radius:var(--radius-lg);padding:1.3rem;margin-bottom:1.1rem}
+    .mod-result h3{font-size:.78rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-bottom:1rem}
+    .mod-row{display:flex;align-items:center;gap:1rem;margin-bottom:.75rem}
+    .mod-name{font-size:.875rem;font-weight:700;color:var(--ink-2);width:180px;flex-shrink:0}
+    .mod-track{flex:1;height:8px;background:var(--surface-3);border-radius:99px;overflow:hidden}
+    .mod-bar{height:100%;border-radius:99px;transition:width .6s ease}
+    .mod-pct{font-size:.8rem;font-weight:800;color:var(--accent);width:38px;text-align:right}
+
+    /* REVIEW LIST */
+    .review-card{background:#fff;border:1.5px solid var(--surface-3);border-radius:var(--radius-lg);padding:1.45rem;box-shadow:var(--shadow-xs);margin-bottom:1.1rem}
+    .review-card h3{font-size:.78rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-bottom:1rem}
+    .review-item{display:flex;align-items:flex-start;gap:.85rem;padding:.85rem;border-radius:var(--radius-sm);margin-bottom:.5rem;border:1.5px solid transparent}
+    .review-item.correct{background:#f0fdf4;border-color:#bbf7d0}
+    .review-item.wrong{background:#fef2f2;border-color:#fecaca}
+    .review-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;flex-shrink:0;margin-top:.1rem}
+    .review-item.correct .review-num{background:#16a34a;color:#fff}
+    .review-item.wrong .review-num{background:#dc2626;color:#fff}
+    .review-body .review-question{font-size:.88rem;font-weight:600;color:var(--ink-2);margin-bottom:.25rem}
+    .review-correct{font-size:.8rem;color:#16a34a;font-weight:700}
+    .review-wrong-ans{font-size:.8rem;color:#dc2626;font-weight:600}
+
+    /* ACTION BUTTONS */
+    .action-row{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center;margin-top:.5rem}
+    .btn-primary-action{display:inline-flex;align-items:center;gap:.45rem;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:.85rem 1.7rem;border-radius:var(--radius-sm);font-size:.95rem;font-weight:700;border:none;cursor:pointer;transition:var(--tr);box-shadow:0 4px 22px rgba(108,60,225,.38)}
+    .btn-primary-action:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(108,60,225,.52)}
+    .btn-outline-action{display:inline-flex;align-items:center;gap:.45rem;background:#fff;color:var(--accent);padding:.82rem 1.7rem;border-radius:var(--radius-sm);font-size:.95rem;font-weight:700;border:1.5px solid var(--accent-3);transition:var(--tr)}
+    .btn-outline-action:hover{background:var(--surface-2);transform:translateY(-1px)}
+
+    /* FOOTER */
+    .site-footer{background:linear-gradient(135deg,#080413 0%,#170c3c 60%,#0c0620 100%);color:#fff;padding:1.5rem 0;margin-top:3rem}
+    .footer-bottom{width:min(var(--container),calc(100% - 2rem));margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem}
+    .footer-bottom p{font-size:.8rem;color:rgba(255,255,255,.28)}
+    .footer-brand-sm{font-size:1.1rem;font-weight:800;background:linear-gradient(90deg,#fff,var(--accent-3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+    @media(max-width:860px){.grid-3{grid-template-columns:1fr 1fr}}
+    @media(max-width:600px){.grid-3{grid-template-columns:1fr}.result-kpi-row{gap:.6rem}.result-kpi{padding:.9rem 1.2rem}.mod-name{width:120px}}
+    @media(max-width:700px){.nav-links{display:none}}
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav-inner">
+    <a class="logo" href="./index.html">YEMM</a>
+    <div class="nav-links">
+      <a href="./index.html">Inicio</a>
+      <a href="./dashboard.html">Dashboard</a>
+      <details class="modules-dropdown">
+        <summary>Módulos</summary>
+        <div class="dropdown-menu">
+          <a href="./modulo-1.html">Módulo 1 — Fundamentos</a>
+          <a href="./modulo-2.html">Módulo 2 — Conteo</a>
+          <a href="./modulo-3.html">Módulo 3 — Criptografía</a>
+        </div>
+      </details>
+      <a class="is-active" href="./evaluacion.html">Evaluación</a>
+      <a href="./perfil.html">Perfil</a>
+      <a href="./login.html">Login</a>
+      <a href="./register.html">Registro</a>
+    </div>
+  </nav>
+</header>
+
+<!-- RESULT HERO -->
+<div class="result-hero">
+  <div class="result-hero-inner">
+    <div class="result-badge-wrap">
+      <div class="result-badge" id="resultEmoji" style="background:linear-gradient(135deg,#f59e0b,#fbbf24)">🏆</div>
+    </div>
+    <h1 id="calificacion">Excelente</h1>
+    <p>Has completado la evaluación general de YEMM</p>
+    <div class="result-kpi-row">
+      <div class="result-kpi"><strong id="puntaje">0/15</strong><span>Puntaje</span></div>
+      <div class="result-kpi"><strong id="porcentaje">0%</strong><span>Porcentaje</span></div>
+      <div class="result-kpi"><strong id="correctas">0</strong><span>Correctas</span></div>
+      <div class="result-kpi"><strong id="incorrectas">0</strong><span>Incorrectas</span></div>
+    </div>
+  </div>
+</div>
+
+<main class="page">
+  <div class="container">
+
+    <!-- MODULE BREAKDOWN -->
+    <div class="mod-result">
+      <h3>Rendimiento por módulo</h3>
+      <div id="modBreakdown"></div>
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="action-row" style="margin-bottom:1.1rem">
+      <a class="btn-primary-action" href="./evaluacion.html">↺ Intentar de nuevo</a>
+      <a class="btn-outline-action" href="./dashboard.html">← Volver al dashboard</a>
+      <a class="btn-outline-action" href="./perfil.html">Ver perfil</a>
+    </div>
+
+    <!-- REVIEW -->
+    <div class="review-card">
+      <h3>Revisión de respuestas</h3>
+      <div id="lista"></div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-bottom">
+    <span class="footer-brand-sm">YEMM</span>
+    <p>© 2026 YEMM — Matemáticas Discretas</p>
+  </div>
+</footer>
+
+<script>
+  const preguntas = [
+    { modulo: "Lógica y Conjuntos", texto: "¿Cuál es el valor de p ∧ ¬p?", correcta: "Falso" },
+    { modulo: "Lógica y Conjuntos", texto: "¿Qué representa A ∩ B?", correcta: "Intersección" },
+    { modulo: "Lógica y Conjuntos", texto: "¿Qué representa A ∪ B?", correcta: "Unión" },
+    { modulo: "Lógica y Conjuntos", texto: "Tabla de verdad de ¬p", correcta: "V→F, F→V" },
+    { modulo: "Lógica y Conjuntos", texto: "Conjuntos disjuntos son:", correcta: "Sin elementos en común" },
+    { modulo: "Teoría de Números", texto: "¿Qué significa a|b?", correcta: "a divide exactamente a b" },
+    { modulo: "Teoría de Números", texto: "¿Cuál de estos es un número primo?", correcta: "13" },
+    { modulo: "Teoría de Números", texto: "¿Cuál es el residuo de 9 mod 4?", correcta: "1" },
+    { modulo: "Teoría de Números", texto: "¿Cuál es el residuo de 2 mod 2?", correcta: "0" },
+    { modulo: "Teoría de Números", texto: "¿Cuál de estos números es compuesto?", correcta: "15" },
+    { modulo: "Congruencias Lineales", texto: "¿Qué significa a ≡ b (mod m)?", correcta: "a y b tienen el mismo residuo" },
+    { modulo: "Congruencias Lineales", texto: "¿Cuál es el residuo de 7 mod 9?", correcta: "7" },
+    { modulo: "Congruencias Lineales", texto: "¿Cuál es el residuo de 22 mod 4?", correcta: "2" },
+    { modulo: "Congruencias Lineales", texto: "¿Cuál congruencia es verdadera?", correcta: "7 ≡ 0 (mod 7)" },
+    { modulo: "Congruencias Lineales", texto: "¿Cuál número es congruente con 4 mod 12?", correcta: "16" },
+  ];
+
+  const respuestas = JSON.parse(localStorage.getItem('respuestas')) || [];
+  let correctasN = 0;
+
+  // Review list
+  const lista = document.getElementById('lista');
+  preguntas.forEach((p, i) => {
+    const ok = respuestas[i] === p.correcta;
+    if (ok) correctasN++;
+    const div = document.createElement('div');
+    div.className = 'review-item ' + (ok ? 'correct' : 'wrong');
+    div.innerHTML = `
+      <div class="review-num">${ok ? '✓' : '✗'}</div>
+      <div class="review-body">
+        <div class="review-question">${i + 1}. ${p.texto}</div>
+        ${ok
+            ? `<div class="review-correct">✓ Respuesta correcta</div>`
+            : `<div class="review-wrong-ans">Tu respuesta: ${respuestas[i] || 'Sin respuesta'}</div>
+             <div class="review-correct">Correcta: ${p.correcta}</div>`
+    }
+      </div>`;
+    lista.appendChild(div);
+  });
+
+  const pct = Math.round((correctasN / 15) * 100);
+  document.getElementById('puntaje').textContent = `${correctasN}/15`;
+  document.getElementById('porcentaje').textContent = `${pct}%`;
+  document.getElementById('correctas').textContent = correctasN;
+  document.getElementById('incorrectas').textContent = 15 - correctasN;
+
+  // Grade
+  let grade, emoji, heroBg;
+  if (pct >= 90) { grade = 'Excelente'; emoji = '🏆'; heroBg = 'linear-gradient(135deg,#f59e0b,#fbbf24)'; }
+  else if (pct >= 70) { grade = 'Muy bien'; emoji = '⭐'; heroBg = 'linear-gradient(135deg,var(--accent),var(--accent-2))'; }
+  else if (pct >= 50) { grade = 'Regular'; emoji = '📈'; heroBg = 'linear-gradient(135deg,#0891b2,#22d3ee)'; }
+  else { grade = 'Necesita mejorar'; emoji = '💪'; heroBg = 'linear-gradient(135deg,#dc2626,#f87171)'; }
+  document.getElementById('calificacion').textContent = grade;
+  const eb = document.getElementById('resultEmoji');
+  eb.textContent = emoji;
+  eb.style.background = heroBg;
+
+  // Module breakdown
+  const mods = ['Lógica y Conjuntos','Teoría de Números','Congruencias Lineales'];
+  const modColors = ['linear-gradient(90deg,#6c3ce1,#9b6bff)','linear-gradient(90deg,#0891b2,#22d3ee)','linear-gradient(90deg,#10b981,#34d399)'];
+  const ranges = [[0,4],[5,9],[10,14]];
+  const bd = document.getElementById('modBreakdown');
+  mods.forEach((m, mi) => {
+    const ok = respuestas.slice(ranges[mi][0], ranges[mi][1] + 1).filter((r, ri) => r === preguntas[ranges[mi][0] + ri].correcta).length;
+    const mpct = Math.round((ok / 5) * 100);
+    bd.innerHTML += `<div class="mod-row">
+      <div class="mod-name">${m}</div>
+      <div class="mod-track"><div class="mod-bar" style="width:${mpct}%;background:${modColors[mi]}"></div></div>
+      <div class="mod-pct">${mpct}%</div>
+    </div>`;
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YEMM | Módulo 3 — Aritmética y Criptografía</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+</head>
+<body data-module-id="3">
+
+  <header class="site-header">
+    <nav class="nav-inner">
+      <a class="logo" href="./index.html">YEMM</a>
+      <div class="nav-links">
+        <a href="./index.html">Inicio</a>
+        <a href="./dashboard.html">Dashboard</a>
+        <details class="modules-dropdown">
+          <summary class="is-active">Módulos</summary>
+          <div class="dropdown-menu">
+            <a href="./modulo-1.html">Módulo 1 — Fundamentos</a>
+            <a href="./modulo-2.html">Módulo 2 — Conteo</a>
+            <a class="is-active" href="./modulo-3.html">Módulo 3 — Criptografía</a>
+          </div>
+        </details>
+        <a href="./evaluacion.html">Evaluación</a>
+        <a href="./perfil.html">Perfil</a>
+        <a href="./login.html">Login</a>
+        <a href="./register.html">Registro</a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="module-page-header" style="background:linear-gradient(135deg,#1c0f0a 0%,#3d1a0a 60%,#7c2d12 100%)">
+    <div class="module-page-inner">
+      <div>
+        <div class="module-eyebrow">Módulo 3 · Criptografía</div>
+        <h1>Aritmética y Números</h1>
+        <p>Aritmética modular, Teorema del Residuo Chino y cifrado César, con calculadoras y herramientas de encriptado en vivo.</p>
+        <div class="module-meta-badges">
+          <span class="meta-badge">3 temas</span>
+          <span class="meta-badge">Cifrado César</span>
+          <span class="meta-badge">CRT</span>
+        </div>
+        <div style="margin-top:1.5rem"><a class="btn-module" href="#contenidos">Ver temas ↓</a></div>
+      </div>
+      <aside class="module-cover-card">
+        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" alt="Módulo 3" />
+        <ul class="module-facts">
+          <li>Congruencias y clases residuales</li>
+          <li>Algoritmo extendido de Euclides</li>
+          <li>Teorema del Residuo Chino (CRT)</li>
+          <li>Cifrado y descifrado César interactivo</li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+
+  <main class="page" id="contenidos">
+    <div class="content-grid cols-2" style="margin-bottom:1.5rem">
+      <article class="card">
+        <div class="card-row">
+          <h3>Temas del módulo</h3>
+          <span class="badge">3 temas</span>
+        </div>
+        <div class="topic-list">
+          <button class="topic-item" data-topic="9">9. Aritmética Modular<span class="topic-num">09</span></button>
+          <button class="topic-item" data-topic="10">10. Teorema del Residuo Chino<span class="topic-num">10</span></button>
+          <button class="topic-item" data-topic="11">11. Cifrado César<span class="topic-num">11</span></button>
+        </div>
+      </article>
+
+      <article class="card card-muted" id="topic-viewer">
+        <div id="topic-content">
+          <div class="topic-placeholder">
+            <div class="topic-placeholder-icon">🔐</div>
+            <h3 style="font-family:var(--font-serif);color:var(--ink);font-size:1.2rem">Selecciona un tema</h3>
+            <p>Haz clic en cualquier tema de la izquierda para ver teoría, ejemplo y recursos.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="content-grid cols-half" style="margin-bottom:1.5rem">
+      <article class="card">
+        <h3>Objetivos del módulo</h3>
+        <ul class="objective-list">
+          <li>Calcular restos y clases residuales módulo n.</li>
+          <li>Encontrar el inverso multiplicativo usando el algoritmo extendido de Euclides.</li>
+          <li>Resolver sistemas de congruencias con el Teorema del Residuo Chino.</li>
+          <li>Encriptar y desencriptar mensajes con el cifrado César.</li>
+          <li>Reconocer las vulnerabilidades del cifrado por desplazamiento.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h3>Calculadora rápida</h3>
+        <div class="calc-form">
+          <div class="calc-row">
+            <input type="number" id="ql" value="17" aria-label="Primer valor" />
+            <select id="qop" aria-label="Operación">
+              <option value="+">Suma</option>
+              <option value="-">Resta</option>
+              <option value="*">Multiplicación</option>
+              <option value="/">División</option>
+              <option value="mod" selected>Módulo</option>
+            </select>
+            <input type="number" id="qr" value="5" aria-label="Segundo valor" />
+          </div>
+          <button class="btn-calc" id="calc-btn">Calcular</button>
+        </div>
+        <div class="calc-result" id="calculator-result">Resultado: —</div>
+      </article>
+    </div>
+
+    <article class="card card-muted" style="width:min(var(--container),calc(100% - 2.5rem));margin:0 auto">
+      <div class="card-row">
+        <h3>Recursos del módulo</h3>
+        <span class="badge">Material de apoyo</span>
+      </div>
+      <ul class="resource-list">
+        <li><a href="https://example.com/modular.pdf" target="_blank">Aritmética modular (PDF)</a></li>
+        <li><a href="https://example.com/crt.pdf" target="_blank">Teorema del Residuo Chino (PDF)</a></li>
+        <li><a href="https://example.com/cesar.pdf" target="_blank">Cifrado César (PDF)</a></li>
+      </ul>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">YEMM</div>
+        <p class="footer-desc">Plataforma interactiva de matemáticas discretas.</p>
+      </div>
+      <div class="footer-links">
+        <h5>Módulos</h5>
+        <ul>
+          <li><a href="./modulo-1.html">Módulo 1</a></li>
+          <li><a href="./modulo-2.html">Módulo 2</a></li>
+          <li><a href="./modulo-3.html">Módulo 3</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h5>Plataforma</h5>
+        <ul>
+          <li><a href="./dashboard.html">Dashboard</a></li>
+          <li><a href="./evaluacion.html">Evaluación</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-inner" style="padding-top:0">
+      <div class="footer-bottom" style="grid-column:1/-1">
+        <p>© 2026 YEMM — Matemáticas Discretas</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function(){
+    function egcd(a,b){if(b===0)return[a,1,0];const[g,x1,y1]=egcd(b,a%b);return[g,y1,x1-Math.floor(a/b)*y1];}
+    function modInv(a,m){const[g,x]=egcd(a,m);if(g!==1)return null;return((x%m)+m)%m;}
+    function crt(systems){
+      const M=systems.reduce((p,s)=>p*s.m,1);let x=0;
+      for(const s of systems){const Mi=M/s.m;const inv=modInv(Mi,s.m);if(inv===null)return null;x+=s.a*Mi*inv;}
+      return((x%M)+M)%M;
+    }
+
+    const topics={
+      9:{title:'Aritmética Modular',theory:'Congruencias módulo n: a ≡ b (mod n) significa que n divide (a-b). Operaciones reducidas módulo n, clases residuales y cálculo de restos. El inverso multiplicativo existe si y solo si gcd(a,n)=1 y se calcula con el algoritmo extendido de Euclides.',example:'42 mod 7 = 0. Inverso de 3 módulo 11: buscar x tal que 3x ≡ 1 (mod 11) → x = 4, porque 3·4=12 ≡ 1 (mod 11).',resources:[['Aritmética modular (PDF)','https://example.com/modular.pdf']],calculator:'modular'},
+      10:{title:'Teorema del Residuo Chino',theory:'Resolver sistemas de congruencias con módulos coprimos. Si m_i son coprimos, existe solución única módulo M=∏m_i. El método constructivo usa inversos y combinaciones lineales (CRT).',example:'Resolver x≡2 (mod 3), x≡3 (mod 5): M=15; M₁=5, M₂=3; inv(5,3)=2, inv(3,5)=2; x = 2·5·2 + 3·3·2 = 20+18=38 ≡ 8 (mod 15).',resources:[['Teorema del Residuo Chino (PDF)','https://example.com/crt.pdf']],calculator:'crt'},
+      11:{title:'Cifrado César',theory:'Cifrado por desplazamiento: cada letra se desplaza k posiciones en el alfabeto. Es simétrico y fácilmente vulnerable a ataques por fuerza bruta (solo 25 claves posibles) o análisis de frecuencia.',example:"'ABC' con desplazamiento 3 → 'DEF'. 'XYZ' con desplazamiento 3 → 'ABC' (ciclo circular).",resources:[['Cifrado César (PDF)','https://example.com/cesar.pdf']],calculator:'caesar'}
+    };
+
+    document.querySelectorAll('.topic-item').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        document.querySelectorAll('.topic-item').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        showTopic(btn.dataset.topic);
+      });
+    });
+
+    function el(tag,props={}){const e=document.createElement(tag);Object.assign(e,props);return e;}
+    function section4(title,text){const s=el('section');s.innerHTML='<h4>'+title+'</h4><p>'+text+'</p>';return s;}
+
+    function showTopic(id){
+      const t=topics[id];const c=document.getElementById('topic-content');c.innerHTML='';
+      c.appendChild(el('h2',{textContent:t.title}));
+      c.appendChild(section4('Teoría',t.theory));
+      c.appendChild(section4('Ejemplo',t.example));
+      if(t.resources&&t.resources.length){
+        const rs=el('section');rs.innerHTML='<h4>Material de apoyo</h4><ul class="resource-list">'+t.resources.map(r=>'<li><a href="'+r[1]+'" target="_blank">'+r[0]+'</a></li>').join('')+'</ul>';
+        c.appendChild(rs);
+      }
+      if(t.calculator==='modular') appendModCalc(c);
+      if(t.calculator==='crt') appendCrtCalc(c);
+      if(t.calculator==='caesar') appendCaesarCalc(c);
+    }
+
+    function appendModCalc(c){
+      const s=el('section');
+      s.innerHTML=`<h4>Calculadora: Aritmética Modular</h4>
+        <div class="calc-widget">
+          <div class="input-row-2"><input id="am-a" placeholder="a" type="number"/><input id="am-m" placeholder="m" type="number"/></div>
+          <div class="calc-btn-row"><button class="btn-sm primary" id="am-run">Calcular</button></div>
+          <pre id="am-out"></pre>
+        </div>`;
+      c.appendChild(s);
+      document.getElementById('am-run').addEventListener('click',()=>{
+        const a=Number(document.getElementById('am-a').value),m=Number(document.getElementById('am-m').value);
+        if(!Number.isFinite(a)||!Number.isFinite(m)||m===0){document.getElementById('am-out').textContent='Introduce valores válidos (m ≠ 0).';return;}
+        const r=((a%m)+m)%m,inv=modInv(a,m);
+        document.getElementById('am-out').textContent='a mod m = '+r+'\nInverso multiplicativo: '+(inv===null?'No existe (gcd(a,m) ≠ 1)':inv);
+      });
+    }
+
+    function appendCrtCalc(c){
+      const s=el('section');
+      s.innerHTML=`<h4>Calculadora: Teorema del Residuo Chino</h4>
+        <div class="calc-widget">
+          <p style="font-size:.82rem;color:var(--ink-3);margin-bottom:.5rem">Introduce pares a,m — uno por línea (ej: 2,3)</p>
+          <textarea id="crt-input" placeholder="2,3&#10;3,5" style="height:90px"></textarea>
+          <div class="calc-btn-row"><button class="btn-sm primary" id="crt-run">Resolver</button></div>
+          <pre id="crt-out"></pre>
+        </div>`;
+      c.appendChild(s);
+      document.getElementById('crt-run').addEventListener('click',()=>{
+        const raw=document.getElementById('crt-input').value.trim();
+        if(!raw){document.getElementById('crt-out').textContent='Introduce al menos un par.';return;}
+        const systems=raw.split('\n').map(l=>{const p=l.split(',');return{a:Number(p[0]),m:Number(p[1])};});
+        if(systems.some(s=>!s.m)){document.getElementById('crt-out').textContent='Formato inválido — usa: a,m';return;}
+        const M=systems.reduce((p,s)=>p*s.m,1);
+        const sol=crt(systems);
+        document.getElementById('crt-out').textContent=sol===null?'No hay solución única (módulos no coprimos).':'x ≡ '+sol+' (mod '+M+')';
+      });
+    }
+
+    function appendCaesarCalc(c){
+      const s=el('section');
+      s.innerHTML=`<h4>Calculadora: Cifrado César</h4>
+        <div class="calc-widget">
+          <textarea id="cesar-text" placeholder="Escribe tu mensaje aquí..." style="height:80px"></textarea>
+          <div style="display:flex;align-items:center;gap:.75rem;margin:.5rem 0;flex-wrap:wrap">
+            <label style="font-size:.82rem;color:var(--ink-3)">Desplazamiento:</label>
+            <input id="cesar-shift" type="number" value="3" style="width:80px"/>
+          </div>
+          <div class="calc-btn-row">
+            <button class="btn-sm primary" id="cesar-enc">🔒 Encriptar</button>
+            <button class="btn-sm outline" id="cesar-dec">🔓 Desencriptar</button>
+          </div>
+          <pre id="cesar-out"></pre>
+        </div>`;
+      c.appendChild(s);
+      function caesar(str,shift){return str.split('').map(ch=>{const code=ch.charCodeAt(0);if(code>=65&&code<=90)return String.fromCharCode((code-65+shift+26)%26+65);if(code>=97&&code<=122)return String.fromCharCode((code-97+shift+26)%26+97);return ch;}).join('');}
+      document.getElementById('cesar-enc').addEventListener('click',()=>{const t=document.getElementById('cesar-text').value,sh=Number(document.getElementById('cesar-shift').value)||0;document.getElementById('cesar-out').textContent=caesar(t,sh);});
+      document.getElementById('cesar-dec').addEventListener('click',()=>{const t=document.getElementById('cesar-text').value,sh=Number(document.getElementById('cesar-shift').value)||0;document.getElementById('cesar-out').textContent=caesar(t,-sh);});
+    }
+
+    document.getElementById('calc-btn').addEventListener('click',()=>{
+      const a=parseFloat(document.getElementById('ql').value),b=parseFloat(document.getElementById('qr').value),op=document.getElementById('qop').value;
+      let r;
+      if(op==='+')r=a+b;else if(op==='-')r=a-b;else if(op==='*')r=a*b;
+      else if(op==='/')r=b===0?'∞':a/b;else r=((a%b)+b)%b;
+      document.getElementById('calculator-result').textContent='Resultado: '+r;
+    });
+  })();
+  </script>
+</body>
+</html>

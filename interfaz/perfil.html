@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YEMM | Perfil</title>
+  <style>
+    :root{--ink:#0f0a1e;--ink-2:#2a1f4a;--ink-3:#6b5c99;--surface:#faf8ff;--surface-2:#f0ebff;--surface-3:#ddd1ff;--accent:#6c3ce1;--accent-2:#9b6bff;--accent-3:#c4a8ff;--accent-glow:rgba(108,60,225,.15);--emerald:#10b981;--radius-sm:10px;--radius:16px;--radius-lg:22px;--shadow-xs:0 2px 8px rgba(15,10,30,.07);--shadow-sm:0 6px 20px rgba(15,10,30,.10);--shadow-md:0 16px 40px rgba(15,10,30,.13);--shadow-lg:0 24px 60px rgba(108,60,225,.18);--container:1160px;--nav-h:68px;--tr:all 0.22s cubic-bezier(.4,0,.2,1)}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+    body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--surface);color:var(--ink);min-height:100vh;line-height:1.65;font-size:16px}
+    a{color:inherit;text-decoration:none}
+    button{font-family:inherit;cursor:pointer}
+
+    .site-header{position:sticky;top:0;z-index:100;background:rgba(250,248,255,.92);backdrop-filter:blur(18px) saturate(1.5);border-bottom:1.5px solid var(--surface-3)}
+    .nav-inner{width:min(var(--container),calc(100% - 2rem));margin:0 auto;height:var(--nav-h);display:flex;align-items:center;gap:.75rem}
+    .logo{font-size:1.8rem;font-weight:800;letter-spacing:-.03em;background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-right:auto}
+    .nav-links{display:flex;align-items:center;gap:.3rem;flex-wrap:wrap}
+    .nav-links a{font-size:.875rem;font-weight:600;color:var(--ink-3);padding:.42rem .85rem;border-radius:999px;border:1.5px solid transparent;transition:var(--tr)}
+    .nav-links a:hover,.nav-links a.is-active{color:var(--accent);background:var(--surface-2);border-color:var(--surface-3)}
+    .modules-dropdown{position:relative}
+    .modules-dropdown summary{list-style:none;font-size:.875rem;font-weight:600;color:var(--ink-3);padding:.42rem .85rem;border-radius:999px;border:1.5px solid transparent;cursor:pointer;transition:var(--tr);display:flex;align-items:center;gap:.35rem;user-select:none}
+    .modules-dropdown summary::-webkit-details-marker{display:none}
+    .modules-dropdown summary::after{content:'▾';font-size:.75rem;transition:transform .2s;display:inline-block}
+    .modules-dropdown[open] summary::after{transform:rotate(180deg)}
+    .modules-dropdown summary:hover,.modules-dropdown[open] summary{color:var(--accent);background:var(--surface-2);border-color:var(--surface-3)}
+    .dropdown-menu{display:none;position:absolute;top:calc(100% + .5rem);left:50%;transform:translateX(-50%);background:#fff;border:1.5px solid var(--surface-3);border-radius:var(--radius);box-shadow:var(--shadow-md);padding:.5rem;min-width:210px;z-index:50}
+    .modules-dropdown[open] .dropdown-menu{display:grid;gap:.25rem}
+    .dropdown-menu a{display:block;padding:.55rem .8rem;border-radius:10px;font-size:.875rem;font-weight:600;color:var(--ink-2);transition:var(--tr)}
+    .dropdown-menu a:hover{background:var(--surface-2);color:var(--accent)}
+
+    /* PROFILE HERO */
+    .profile-hero{background:linear-gradient(135deg,#0a0618 0%,#180d3c 40%,#2b1265 70%,#180d3c 100%);padding:2.75rem 0 0;position:relative;overflow:hidden}
+    .profile-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 20% -10%,rgba(108,60,225,.5) 0%,transparent 60%);pointer-events:none}
+    .profile-hero-inner{width:min(var(--container),calc(100% - 2rem));margin:0 auto;position:relative;z-index:1;display:flex;align-items:flex-end;gap:2rem;flex-wrap:wrap;padding-bottom:0}
+    .avatar{width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-size:2.4rem;color:#fff;font-weight:800;flex-shrink:0;border:3px solid rgba(255,255,255,.2);box-shadow:0 8px 30px rgba(108,60,225,.55);margin-bottom:-1.5rem}
+    .profile-hero-info{flex:1;min-width:0;padding-bottom:1.8rem}
+    .profile-eyebrow{font-size:.73rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:.4rem}
+    .profile-hero-info h1{font-size:2rem;font-weight:800;color:#fff;letter-spacing:-.02em;margin-bottom:.25rem}
+    .profile-hero-info p{font-size:.88rem;color:rgba(255,255,255,.52)}
+    .profile-hero-actions{display:flex;gap:.65rem;flex-wrap:wrap;margin-left:auto;padding-bottom:1.8rem;align-self:center}
+    .btn-hero-outline{display:inline-flex;align-items:center;gap:.45rem;background:rgba(255,255,255,.1);color:rgba(255,255,255,.88);border:1.5px solid rgba(255,255,255,.2);padding:.6rem 1.25rem;border-radius:var(--radius-sm);font-size:.875rem;font-weight:700;transition:var(--tr);font-family:inherit;cursor:pointer}
+    .btn-hero-outline:hover{background:rgba(255,255,255,.18)}
+    .profile-tabs{width:min(var(--container),calc(100% - 2rem));margin:0 auto;display:flex;gap:.25rem;position:relative;z-index:1;padding-top:1.5rem}
+    .tab{font-size:.875rem;font-weight:700;color:rgba(255,255,255,.45);padding:.65rem 1.1rem;border-radius:var(--radius-sm) var(--radius-sm) 0 0;cursor:pointer;transition:var(--tr);border:none;background:none;font-family:inherit}
+    .tab.active,.tab:hover{color:#fff;background:rgba(255,255,255,.1)}
+    .tab.active{background:rgba(255,255,255,.14);color:#fff}
+
+    /* CONTENT */
+    .page{padding:2.25rem 0 5rem}
+    .container{width:min(var(--container),calc(100% - 2rem));margin:0 auto}
+    .grid-3{display:grid;gap:1.1rem;grid-template-columns:repeat(3,1fr)}
+    .grid-2{display:grid;gap:1.1rem;grid-template-columns:1fr 1fr}
+
+    .card{background:#fff;border:1.5px solid var(--surface-3);border-radius:var(--radius-lg);padding:1.45rem;box-shadow:var(--shadow-xs);transition:var(--tr)}
+    .card:hover{box-shadow:var(--shadow-sm)}
+    .card-muted{background:linear-gradient(145deg,var(--surface-2),var(--surface));border:1.5px solid var(--surface-3);border-radius:var(--radius-lg);padding:1.45rem}
+    .card h3{font-size:.8rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-bottom:1rem}
+
+    /* USER CARD */
+    .user-avatar-sm{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:#fff;font-weight:800;margin-bottom:1rem}
+    .user-name{font-size:1.25rem;font-weight:800;color:var(--ink);letter-spacing:-.01em;margin-bottom:.2rem}
+    .user-email{font-size:.85rem;color:var(--ink-3);margin-bottom:.3rem}
+    .user-since{display:inline-flex;align-items:center;gap:.35rem;background:var(--surface-2);border:1px solid var(--surface-3);border-radius:999px;padding:.22rem .7rem;font-size:.74rem;font-weight:600;color:var(--ink-3);margin-bottom:1.1rem}
+    .btn-accent{display:inline-flex;align-items:center;gap:.4rem;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:.65rem 1.25rem;border-radius:var(--radius-sm);font-size:.875rem;font-weight:700;border:none;cursor:pointer;transition:var(--tr);font-family:inherit;width:100%;justify-content:center}
+    .btn-accent:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(108,60,225,.4)}
+    .btn-outline{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--accent);padding:.65rem 1.25rem;border-radius:var(--radius-sm);font-size:.875rem;font-weight:700;border:1.5px solid var(--accent-3);cursor:pointer;transition:var(--tr);font-family:inherit;width:100%;justify-content:center;margin-top:.5rem}
+    .btn-outline:hover{background:var(--surface-2)}
+
+    /* KPI */
+    .kpi-value{font-size:2.2rem;font-weight:800;color:var(--accent);line-height:1;margin-bottom:.25rem;letter-spacing:-.02em}
+    .kpi-label{font-size:.8rem;color:var(--ink-3);font-weight:600}
+    .kpi-row{display:flex;gap:1.5rem;margin-bottom:1rem}
+
+    /* PROGRESS */
+    .prog-label{display:flex;justify-content:space-between;font-size:.82rem;font-weight:700;color:var(--ink-2);margin-bottom:.35rem}
+    .prog-track{height:8px;background:var(--surface-2);border-radius:99px;overflow:hidden;margin-bottom:.75rem}
+    .prog-bar{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .6s ease}
+
+    /* ACHIEVEMENTS */
+    .achievement{display:flex;align-items:center;gap:.8rem;padding:.7rem .9rem;background:var(--surface-2);border:1px solid var(--surface-3);border-radius:var(--radius-sm);margin-bottom:.45rem;transition:var(--tr)}
+    .achievement:hover{border-color:var(--accent-3)}
+    .ach-icon{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#fbbf24);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+    .ach-name{font-size:.875rem;font-weight:700;color:var(--ink-2)}
+    .ach-date{font-size:.75rem;color:var(--ink-3)}
+
+    /* TABLE */
+    .table-wrap{overflow-x:auto}
+    table{width:100%;border-collapse:collapse;font-size:.875rem}
+    thead tr{border-bottom:2px solid var(--surface-3)}
+    th{font-size:.73rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);padding:.6rem .9rem;text-align:left}
+    td{padding:.72rem .9rem;color:var(--ink-2);border-bottom:1px solid var(--surface-2)}
+    tr:last-child td{border-bottom:none}
+    .score-badge{display:inline-flex;align-items:center;justify-content:center;width:44px;height:26px;border-radius:999px;font-size:.8rem;font-weight:700}
+    .score-hi{background:#dcfce7;color:#15803d}
+    .score-mid{background:#fef9c3;color:#a16207}
+    .score-lo{background:#fee2e2;color:#dc2626}
+
+    /* ACTIVITY */
+    .activity-item{display:flex;align-items:flex-start;gap:.85rem;padding:.75rem 0;border-bottom:1px solid var(--surface-2)}
+    .activity-item:last-child{border-bottom:none}
+    .act-dot{width:32px;height:32px;border-radius:50%;background:var(--surface-2);border:2px solid var(--surface-3);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;margin-top:.1rem}
+    .act-body{flex:1}
+    .act-title{font-size:.875rem;font-weight:600;color:var(--ink-2);margin-bottom:.15rem}
+    .act-time{font-size:.75rem;color:var(--ink-3)}
+
+    /* FOOTER */
+    .site-footer{background:linear-gradient(135deg,#080413 0%,#170c3c 60%,#0c0620 100%);color:#fff;padding:2rem 0;margin-top:3rem}
+    .footer-inner{width:min(var(--container),calc(100% - 2rem));margin:0 auto;display:grid;gap:2.25rem}
+    .footer-brand{font-size:1.4rem;font-weight:800;background:linear-gradient(90deg,#fff,var(--accent-3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.3rem}
+    .footer-bottom{padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.09);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem}
+    .footer-bottom p{font-size:.8rem;color:rgba(255,255,255,.28)}
+
+    @media(max-width:860px){.grid-3,.grid-2{grid-template-columns:1fr}}
+    @media(max-width:700px){.nav-links{display:none}.profile-hero-actions{width:100%;padding-bottom:0;margin-left:0}.profile-hero-info{padding-bottom:0}}
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav-inner">
+    <a class="logo" href="./index.html">YEMM</a>
+    <div class="nav-links">
+      <a href="./index.html">Inicio</a>
+      <a href="./dashboard.html">Dashboard</a>
+      <details class="modules-dropdown">
+        <summary>Módulos</summary>
+        <div class="dropdown-menu">
+          <a href="./modulo-1.html">Módulo 1 — Fundamentos</a>
+          <a href="./modulo-2.html">Módulo 2 — Conteo</a>
+          <a href="./modulo-3.html">Módulo 3 — Criptografía</a>
+        </div>
+      </details>
+      <a href="./evaluacion.html">Evaluación</a>
+      <a class="is-active" href="./perfil.html">Perfil</a>
+      <a href="./login.html">Login</a>
+      <a href="./register.html">Registro</a>
+    </div>
+  </nav>
+</header>
+
+<!-- PROFILE HERO -->
+<div class="profile-hero">
+  <div class="profile-hero-inner">
+    <div class="avatar">J</div>
+    <div class="profile-hero-info">
+      <div class="profile-eyebrow">Estudiante · Matemáticas Discretas</div>
+      <h1>Juan Pérez</h1>
+      <p>juan.perez@email.com · Miembro desde Enero 2026</p>
+    </div>
+    <div class="profile-hero-actions">
+      <button class="btn-hero-outline">⚙ Configuración</button>
+      <button class="btn-hero-outline">✏ Editar perfil</button>
+    </div>
+  </div>
+  <div class="profile-tabs">
+    <button class="tab active">Resumen</button>
+    <button class="tab">Módulos</button>
+    <button class="tab">Logros</button>
+    <button class="tab">Actividad</button>
+  </div>
+</div>
+
+<main class="page">
+  <div class="container">
+
+    <!-- STATS ROW -->
+    <div class="grid-3" style="margin-bottom:1.1rem">
+      <div class="card">
+        <h3>Progreso general</h3>
+        <div class="kpi-value">47%</div>
+        <div class="kpi-label">28 de 60 lecciones completadas</div>
+        <div class="prog-track" style="margin-top:.9rem"><div class="prog-bar" style="width:47%"></div></div>
+      </div>
+      <div class="card">
+        <h3>Tiempo de estudio</h3>
+        <div class="kpi-value">24h</div>
+        <div class="kpi-label">Horas totales estudiadas</div>
+        <div class="kpi-row" style="margin-top:.9rem">
+          <div><div style="font-size:1.3rem;font-weight:800;color:var(--accent)">7</div><div class="kpi-label">Esta semana</div></div>
+          <div><div style="font-size:1.3rem;font-weight:800;color:var(--accent)">3.2</div><div class="kpi-label">Promedio/día</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Logros</h3>
+        <div class="kpi-value">12</div>
+        <div class="kpi-label">Insignias desbloqueadas</div>
+        <div style="display:flex;gap:.35rem;flex-wrap:wrap;margin-top:.9rem">
+          <span style="font-size:1.4rem" title="Primera lección">🎯</span>
+          <span style="font-size:1.4rem" title="Lógico">🧠</span>
+          <span style="font-size:1.4rem" title="Semana completa">🔥</span>
+          <span style="font-size:1.4rem" title="Evaluación perfecta">⭐</span>
+          <span style="font-size:1.4rem;opacity:.3">🏆</span>
+          <span style="font-size:1.4rem;opacity:.3">💎</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN GRID -->
+    <div class="grid-2" style="margin-bottom:1.1rem">
+      <!-- Progreso por módulo -->
+      <div class="card">
+        <h3>Progreso por módulo</h3>
+        <div class="prog-label"><span>Módulo 1 — Fundamentos</span><span style="color:var(--accent)">75%</span></div>
+        <div class="prog-track"><div class="prog-bar" style="width:75%"></div></div>
+        <div class="prog-label"><span>Módulo 2 — Conteo</span><span style="color:var(--accent)">45%</span></div>
+        <div class="prog-track"><div class="prog-bar" style="width:45%"></div></div>
+        <div class="prog-label"><span>Módulo 3 — Criptografía</span><span style="color:var(--accent)">20%</span></div>
+        <div class="prog-track"><div class="prog-bar" style="width:20%"></div></div>
+        <a href="./modulo-1.html" style="display:inline-flex;align-items:center;gap:.4rem;font-size:.875rem;font-weight:700;color:var(--accent);margin-top:.5rem;transition:var(--tr)">Continuar aprendiendo →</a>
+      </div>
+
+      <!-- Historial de evaluaciones -->
+      <div class="card">
+        <h3>Historial de evaluaciones</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Fecha</th><th>Módulo</th><th>Puntaje</th></tr></thead>
+            <tbody>
+            <tr>
+              <td>25 Mar 2026</td>
+              <td>General</td>
+              <td><span class="score-badge score-hi">85</span></td>
+            </tr>
+            <tr>
+              <td>20 Mar 2026</td>
+              <td>Módulo 1</td>
+              <td><span class="score-badge score-hi">90</span></td>
+            </tr>
+            <tr>
+              <td>15 Mar 2026</td>
+              <td>Módulo 2</td>
+              <td><span class="score-badge score-mid">78</span></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <a class="btn-accent" href="./evaluacion.html" style="margin-top:1rem">Nueva evaluación →</a>
+      </div>
+    </div>
+
+    <!-- BOTTOM ROW -->
+    <div class="grid-2">
+      <!-- Logros recientes -->
+      <div class="card">
+        <h3>Logros recientes</h3>
+        <div class="achievement">
+          <div class="ach-icon">🎯</div>
+          <div><div class="ach-name">Primera lección</div><div class="ach-date">Hace 3 días</div></div>
+        </div>
+        <div class="achievement">
+          <div class="ach-icon" style="background:linear-gradient(135deg,#8b5cf6,#a78bfa)">🧠</div>
+          <div><div class="ach-name">Maestro de la lógica</div><div class="ach-date">Hace 5 horas</div></div>
+        </div>
+        <div class="achievement">
+          <div class="ach-icon" style="background:linear-gradient(135deg,#0891b2,#22d3ee)">📐</div>
+          <div><div class="ach-name">Experto en inducción matemática</div><div class="ach-date">Hace 1 día</div></div>
+        </div>
+        <div class="achievement">
+          <div class="ach-icon" style="background:linear-gradient(135deg,#dc2626,#f87171)">🔥</div>
+          <div><div class="ach-name">Semana completa</div><div class="ach-date">Hace 2 días</div></div>
+        </div>
+      </div>
+
+      <!-- Actividad reciente -->
+      <div class="card">
+        <h3>Actividad reciente</h3>
+        <div class="activity-item">
+          <div class="act-dot">📖</div>
+          <div class="act-body">
+            <div class="act-title">Completaste: Tablas de verdad</div>
+            <div class="act-time">Hace 2 horas</div>
+          </div>
+        </div>
+        <div class="activity-item">
+          <div class="act-dot">🏅</div>
+          <div class="act-body">
+            <div class="act-title">Logro desbloqueado: Maestro de la lógica</div>
+            <div class="act-time">Hace 5 horas</div>
+          </div>
+        </div>
+        <div class="activity-item">
+          <div class="act-dot">✅</div>
+          <div class="act-body">
+            <div class="act-title">Evaluación completada: 85/100</div>
+            <div class="act-time">Hace 1 día</div>
+          </div>
+        </div>
+        <div class="activity-item">
+          <div class="act-dot">📚</div>
+          <div class="act-body">
+            <div class="act-title">Módulo 2 iniciado: Combinatoria</div>
+            <div class="act-time">Hace 2 días</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-bottom" style="grid-column:1/-1">
+      <div class="footer-brand">YEMM</div>
+      <p>© 2026 YEMM — Matemáticas Discretas</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
